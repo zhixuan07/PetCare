@@ -3,5 +3,5 @@
 </script>
 <template>
 
-// html goes here
+
 </template>
