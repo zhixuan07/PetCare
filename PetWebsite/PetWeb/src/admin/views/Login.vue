@@ -16,7 +16,7 @@ function login(ev) {
   ev.preventDefault();
   if(admin.username == 'admin' && admin.password == 'admin'){
     store.commit('setAdmin', true);
-    router.push({ name: "AdminDashboard" });
+    router.push({ name: "adminDashboard" });
     }else{
         errmsg.value = 'Invalid username or password';
     }

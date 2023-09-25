@@ -7,6 +7,6 @@
             
         "
     >
-       <RouterView></RouterView>
+       <routerView></routerView>
     </div>
   </template>

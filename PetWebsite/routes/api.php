@@ -19,3 +19,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::post('/adminLogin',[\App\Http\Controllers\adminAuthController::class,'login']);
+Route::get('/products', [\App\Http\Controllers\ProductController::class,'index']);
+Route::post('/products/add', [\App\Http\Controllers\ProductController::class,'store']);
+Route::delete('/products/{id}', [\App\Http\Controllers\ProductController::class,'destroy']);
+Route::post('/products/update/{id}', [\App\Http\Controllers\ProductController::class,'update']);
