@@ -57,9 +57,9 @@ const delete_product = (id)=>{
     </div>
 
     <div class="overflow-x-auto  "> 
-    <table class="min-w-full bg-white border-collapse border-r-2 border-l-2 border-gray-100 ">
+    <table class=" bg-white border-collapse border-r-2 border-l-2 border-gray-100 ">
       <thead>
-        <tr>
+        <tr class="text-sm">
             <th  class="py-2 px-4 bg-gray-200 text-gray-600 font-semibold uppercase border-b border-r border-gray-100">ID</th>
           <th  class="py-2 px-4 bg-gray-200 text-gray-600 font-semibold uppercase border-b border-r border-gray-100">SKU Code</th>
           <th class="py-2 px-4 bg-gray-200 text-gray-600 font-semibold uppercase border-b border-r border-gray-100">Name</th>

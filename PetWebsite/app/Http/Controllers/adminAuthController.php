@@ -1,51 +1,73 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\Admin;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-
-
+use Illuminate\Validation\Rules\Password;
+use Illuminate\Support\Facades\Validator;
 class adminAuthController
 {
-    public function login(Request $request)
+    public function register(Request $request): \Illuminate\Foundation\Application|\Illuminate\Http\Response|\Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\Routing\ResponseFactory
     {
-        $credentials = $request->validate([
-            'username' => 'required|string|exists:admin,username',
-            'password' => 'required',
-
+        $data = $request->validate([
+            'first_name' => 'required|string',
+            'last_name' => 'required|string',
+            'email' => 'required|email|string|unique:users,email',
+            'password' => [
+                'required',
+                'confirmed',
+                Password::min(8)->mixedCase()->numbers()
+            ]
         ]);
 
-
-
-        if (!Auth::guard('admin')->attempt($credentials)) {
-            return response(
-                [
-                    'error' => 'Username or Password is incorrect'
-                ],
-                422
-            );
-        }
-
-
-
-        $admin = Auth::guard('admin')->user();
-        $token = $admin->createToken('main')->plainTextToken;
+        /** @var \App\Models\User $user */
+        $user = User::create([
+            'first_name' => $data['first_name'],
+            'last_name' => $data['last_name'],
+            'email' => $data['email'],
+            'password' => bcrypt($data['password'])
+        ]);
+        $token = $user->createToken('main')->plainTextToken;
 
         return response([
-            'admin' => $admin,
+            'user' => $user,
             'token' => $token
         ]);
-    }
 
+    }
+    public function login(Request $request)
+    {
+        // Define validation rules
+        $rules = [
+            'username' => 'required|exists:admins,username',
+            'password' => 'required',
+            'remember' => 'boolean',
+        ];
+
+        // Validate the request data
+        $validator = Validator::make($request->all(), $rules);
+
+        // Check if validation fails
+        if ($validator->fails()) {
+            return response()->json(['message' => 'Validation failed', 'errors' => $validator->errors()], 422);
+        }
+        $user = Auth::user();
+
+        return response([
+            'user'=>$user,
+
+        ]);
+    }
     public function logout()
     {
-        /** @var Admin $admin */
-        $admin = Auth::guard('admin')->user();
+        /** @var User $user */
+        $user = Auth::user();
 
-        $admin->currentAccessToken()->delete();
+        $user->currentAccessToken()->delete();
         return response([
             'success' => true
         ]);
     }
+
 }

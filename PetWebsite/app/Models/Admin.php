@@ -11,8 +11,11 @@ class Admin extends Authenticatable
 {
     use HasApiTokens,HasFactory, Notifiable;
 
-    // Define the table associated with the model
-    protected $table = 'admin';
+
+    protected $fillable = [
+        'username',
+        'password',
+    ];
 
     // Other model properties and methods, if needed
     protected $hidden = [
