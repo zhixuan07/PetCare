@@ -35,7 +35,7 @@ class ProductController
 
         $validatedData = $request->validate(
             [
-                'sku'=>['required','Integer', Rule::unique('products', 'sku')],
+                'sku'=>['required','String', Rule::unique('products', 'sku')],
                 'name'=>['required','String'],
                 'description'=>['required','String'],
                 'price'=>['required','String'],
@@ -67,7 +67,7 @@ class ProductController
         $product = Product::find($id);
         $validatedData = $request->validate(
             [
-                'sku'=>['required','Integer'],
+                'sku'=>['required','String'],
                 'name'=>['required','String'],
                 'description'=>['required','String'],
                 'price'=>['required','String'],

@@ -17,7 +17,7 @@ function update(id){
 
 </script>
 <template>
-    <div class="h-full p-6 bg-white rounded-md shadow-xl overflow-auto">
+    <div class="h-full w-3/5 p-6 bg-white rounded-md shadow-xl overflow-auto">
         <div class="flex items-center justify-between p-3">
             <h3 class="text-2xl">Update Product</h3>
 

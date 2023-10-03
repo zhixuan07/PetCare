@@ -1,7 +1,7 @@
 <script setup>
 
 import axiosClient from '../axiosClient'
-import { ref,onMounted } from 'vue';
+import { ref,onMounted,computed,watch, watchEffect } from 'vue';
 import addProductModal from '../components/addProductModal.vue';
 import editProductModal from '../components/editProductModal.vue';
 import Product from '../product'
@@ -9,14 +9,38 @@ defineEmits('close')
 const {deleteProduct} = Product();
 
 const products =ref([]);
+const searchInput = ref('');
 const isAddOpen = ref(false);
 const isEditOpen = ref(false);
 
 const selectedProduct = ref(null)
 
-onMounted (()=> axiosClient.get('/products').then((response) => {
+
+onMounted(() => {
+  axiosClient.get('/products').then((response) => {
+    products.value = response.data;
+    console.log(products.value)
+  });
+});
+
+//watch search input and filter products based on search input
+watch(searchInput, (value) => {
+  if ( value === '') {
+    axiosClient.get('/products').then((response) => {
       products.value = response.data;
-    }));
+      
+    });
+  }else{
+    products.value = products.value.filter((product) => {
+      return product.name.toLowerCase().includes(value.toLowerCase());
+    });
+    console.log(products.value)
+
+  }
+});
+  
+
+
 
 const openAddModal = ()=> {
     isAddOpen.value = true;
@@ -56,25 +80,34 @@ const delete_product = (id)=>{
 
     </div>
 
-    <div class="overflow-x-auto  "> 
-    <table class=" bg-white border-collapse border-r-2 border-l-2 border-gray-100 ">
+    <div class="flex w-full justify-end mb-2">
+      <input
+        type="text"
+        v-model="searchInput"
+        class="w-1/5 p-2 border border-gray-300 rounded mr-2"
+        
+        placeholder="Search"/>
+    </div>
+   
+    <div class="overflow-x-auto border-gray-200 max-h-screen w-full "> 
+    <table class="table-fixed  bg-white border-collapse border-r-2 border-l-2 border-gray-100  ml-2 mr-2 ">
       <thead>
-        <tr class="text-sm">
-            <th  class="py-2 px-4 bg-gray-200 text-gray-600 font-semibold uppercase border-b border-r border-gray-100">ID</th>
-          <th  class="py-2 px-4 bg-gray-200 text-gray-600 font-semibold uppercase border-b border-r border-gray-100">SKU Code</th>
-          <th class="py-2 px-4 bg-gray-200 text-gray-600 font-semibold uppercase border-b border-r border-gray-100">Name</th>
-          <th class="py-2 px-4 bg-gray-200 text-gray-600 font-semibold uppercase border-b border-r border-gray-100">Price</th>
-          <th class="py-2 px-4 bg-gray-200 text-gray-600 font-semibold uppercase border-b border-r border-gray-100">Image</th>
-          <th class="py-2 px-4 bg-gray-200 text-gray-600 font-semibold uppercase border-b border-r border-gray-100">Description</th>
-          <th class="py-2 px-4 bg-gray-200 text-gray-600 font-semibold uppercase border-b border-r border-gray-100">Category</th>
-          <th class="py-2 px-4 bg-gray-200 text-gray-600 font-semibold uppercase border-b border-r border-gray-100">Brand</th>
-          <th class="py-2 px-4 bg-gray-200 text-gray-600 font-semibold uppercase border-b border-r border-gray-100">Stock</th>
-          <th class="py-2 px-4 bg-gray-200 text-gray-600 font-semibold uppercase border-b border-r border-gray-100">Action</th>
+        <tr class="text-xs ">
+          <th  class="py-2 px-4 min-w-[100px]  bg-gray-200 text-gray-600 font-semibold uppercase border-b border-r border-gray-100">ID</th>
+          <th  class="py-2 px-4 min-w-[100px]  bg-gray-200 text-gray-600 font-semibold uppercase border-b border-r border-gray-100">SKU Code</th>
+          <th class="py-2 px-4 min-w-[100px]  bg-gray-200 text-gray-600 font-semibold uppercase border-b border-r border-gray-100">Name</th>
+          <th class="py-2 px-4 min-w-[100px]  bg-gray-200 text-gray-600 font-semibold uppercase border-b border-r border-gray-100">Price</th>
+          <th class="py-2 px-4 min-w-[100px]  bg-gray-200 text-gray-600 font-semibold uppercase border-b border-r border-gray-100">Image</th>
+          <th class="py-2 px-4 min-w-[100px]  bg-gray-200 text-gray-600 font-semibold uppercase border-b border-r border-gray-100">Description</th>
+          <th class="py-2 px-4 min-w-[100px]  bg-gray-200 text-gray-600 font-semibold uppercase border-b border-r border-gray-100">Category</th>
+          <th class="py-2 px-4 min-w-[100px]  bg-gray-200 text-gray-600 font-semibold uppercase border-b border-r border-gray-100">Brand</th>
+          <th class="py-2 px-4 min-w-[100px]  bg-gray-200 text-gray-600 font-semibold uppercase border-b border-r border-gray-100">Stock</th>
+          <th class="py-2 px-4 min-w-[100px]  bg-gray-200 text-gray-600 font-semibold uppercase border-b border-r border-gray-100">Action</th>
           
         </tr>
       </thead>
       <tbody>
-        <tr v-for="product in products" :key="product.id" class="text-sm">
+        <tr  v-for="product in products" :key="product.id" class="text-xs">
             <td class="border border-gray-200">{{ product.id }}</td>
           <td class="border border-gray-200">{{ product.sku }}</td>
           <td class="border border-gray-200">{{ product.name }}</td>
@@ -88,8 +121,10 @@ const delete_product = (id)=>{
             <button @click="openEditModal(product)" class="px-1 py-2 w-16 bg-blue-600 hover:bg-blue-500 rounded-xl">Edit</button>
             <button @click="delete_product(product.id)" class="px-1 py-2 w-16 bg-red-600 hover:bg-red-500 rounded-xl">Delete</button>
           </td>
-          
+
         </tr>
+        <p v-if="!products.values">Product Not Found</p>
+       
       </tbody>
     </table>
     <Teleport to="body">

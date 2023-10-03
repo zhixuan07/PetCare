@@ -54,10 +54,11 @@ class adminAuthController
         }
         $user = Auth::user();
 
-        return response([
+        return response()->json([
             'user'=>$user,
+            'message'=>'Success'
 
-        ]);
+        ],200);
     }
     public function logout()
     {

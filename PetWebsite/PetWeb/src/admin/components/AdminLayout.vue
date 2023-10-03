@@ -8,9 +8,12 @@ import sideBar from '../components/sideBar.vue';
 <template>
  
   
- <div class="flex">
-    <sideBar />
-    <div class="flex-grow">
+ <div class="flex ">
+   <div class="w-1/5">
+      <sideBar />
+   </div>
+
+    <div class=" w-full overflow-x-auto">
        <RouterView />
        
     </div>

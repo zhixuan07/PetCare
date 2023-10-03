@@ -16,7 +16,13 @@ const admin = {
 
 function login(ev) {
   ev.preventDefault();
-  axiosClient.post("/adminLogin",admin)
+    store.dispatch('getAdmin', admin).then(() => {
+       router.push({name:'adminDashboard'})
+       .catch(err => {
+            console.log(err.response.data.message);
+           errmsg.value = err.response.data.message;
+       })
+    });
 }
 
 </script>
