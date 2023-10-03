@@ -34,20 +34,32 @@ const router = createRouter({
             ],
         },
         {
-            path: "/admin",
-            redirect: "/adminDashboard",
-            name: "admin",
-            component: () => import("../admin/components/AdminLayout.vue"),
-            meta: { requiresAuth: true },
+            path: '/admin',
+            name: 'admin',
+            component: () => import('../admin/components/AdminLayout.vue'), // Use the layout component
+         
             children: [
-                {
-                    path: "/adminDashboard",
-                    name: "AdminDashboard",
-                    component: () => import("../admin/views/Dashboard.vue"),
-                },
+              {
+                path: '/adminDashboard',
+                name: 'adminDashboard',
+                component: () => import('../admin/views/Dashboard.vue'),
+              },
+              {
+                path: '/adminProducts',
+                name: 'adminProducts',
+                component: () => import('../admin/views/Products.vue'),
+              },
+              // Add other admin routes here
             ],
-        },
+          }
+          
+          
     ],
+});
+router.beforeEach((to, from, next) => {
+    
+        next();
+    
 });
 
 export default router;

@@ -1,3 +1,10 @@
+<script setup>
+import { RouterLink } from 'vue-router';
+
+
+</script>
 <template>
-    <h1>Dashboard</h1>
+<p>AdminDashboard</p>
+
+   
 </template>

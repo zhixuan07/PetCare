@@ -2,6 +2,7 @@
 import { ref } from "vue";
 import { useRouter } from "vue-router";
 import { useStore } from "vuex";
+import axiosClient from "../axiosClient";
 const router = useRouter();
 const errmsg = ref(null);
 const  store = useStore();
@@ -9,17 +10,19 @@ const  store = useStore();
 const admin = {
     username: '',
     password: '',
+    remember: false,
    
 }
 
 function login(ev) {
   ev.preventDefault();
-  if(admin.username == 'admin' && admin.password == 'admin'){
-    store.commit('setAdmin', true);
-    router.push({ name: "AdminDashboard" });
-    }else{
-        errmsg.value = 'Invalid username or password';
-    }
+    store.dispatch('getAdmin', admin).then(() => {
+       router.push({name:'adminDashboard'})
+       .catch(err => {
+            console.log(err.response.data.message);
+           errmsg.value = err.response.data.message;
+       })
+    });
 }
 
 </script>
@@ -31,7 +34,7 @@ function login(ev) {
 
             <form class="bg-white p-8 rounded-lg shadow-md" @submit="login">
                 <div class="mb-4">
-                    <label for="username" class="text-gray-800 block mb-2"
+                    <label class="text-gray-800 block mb-2"
                         >Username:</label
                     >
                     <input
@@ -44,7 +47,7 @@ function login(ev) {
                     />
                 </div>
                 <div class="mb-4">
-                    <label for="password" class="text-gray-800 block mb-2"
+                    <label class="text-gray-800 block mb-2"
                         >Password:</label
                     >
                     <input
