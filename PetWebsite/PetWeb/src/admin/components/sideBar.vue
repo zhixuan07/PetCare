@@ -53,7 +53,7 @@
                         href="#"
                     >
                         <routerLink
-                            to="/adminProducts"
+                            to="/adminOrders"
                             class="font-QuicksandMedium"
                             >Order</routerLink
                         >

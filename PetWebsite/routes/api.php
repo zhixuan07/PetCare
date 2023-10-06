@@ -23,3 +23,4 @@ Route::get('/products', [\App\Http\Controllers\ProductController::class,'index']
 Route::post('/products/add', [\App\Http\Controllers\ProductController::class,'store']);
 Route::delete('/products/{id}', [\App\Http\Controllers\ProductController::class,'destroy']);
 Route::post('/products/update/{id}', [\App\Http\Controllers\ProductController::class,'update']);
+Route::get("/admin/orders",[\App\Http\Controllers\OrderController::class,'index']);
