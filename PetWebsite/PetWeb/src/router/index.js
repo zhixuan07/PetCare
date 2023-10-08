@@ -54,6 +54,11 @@ const router = createRouter({
                 name: 'adminOrders',
                 component: () => import('../admin/views/Orders.vue'),
               },
+              {
+                path:'/adminOrderDetails/:id',
+                name:'adminOrderDetails',
+                component: () => import('../admin/views/OrderDetails.vue'),
+              }
               // Add other admin routes here
             ],
           }

@@ -118,8 +118,8 @@ const delete_product = (id)=>{
           <td class="border border-gray-200"> {{ product.brand}}</td>
           <td class="border border-gray-200"> {{ product.stock }}</td>
           <td class="text-white border border-gray-200 ">
-            <button @click="openEditModal(product)" class="px-1 py-2 w-16 bg-blue-600 hover:bg-blue-500 rounded-xl">Edit</button>
-            <button @click="delete_product(product.id)" class="px-1 py-2 w-16 bg-red-600 hover:bg-red-500 rounded-xl">Delete</button>
+            <button @click="openEditModal(product)" class="px-1 py-2 m-1 w-16 bg-blue-600 hover:bg-blue-500 rounded-xl">Edit</button>
+            <button @click="delete_product(product.id)" class="px-1 py-2 m-1 w-16 bg-red-600 hover:bg-red-500 rounded-xl">Delete</button>
           </td>
 
         </tr>

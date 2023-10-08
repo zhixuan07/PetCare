@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use \App\Http\Controllers\OrderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,4 +24,6 @@ Route::get('/products', [\App\Http\Controllers\ProductController::class,'index']
 Route::post('/products/add', [\App\Http\Controllers\ProductController::class,'store']);
 Route::delete('/products/{id}', [\App\Http\Controllers\ProductController::class,'destroy']);
 Route::post('/products/update/{id}', [\App\Http\Controllers\ProductController::class,'update']);
-Route::get("/admin/orders",[\App\Http\Controllers\OrderController::class,'index']);
+Route::get("/admin/orders",[\App\Http\Controllers\OrderController::class,'showAllOrders']);
+Route::get("/admin/orders/{id}",[\App\Http\Controllers\OrderController::class,'showOrderDetails']);
+Route::patch("/admin/deleteOrder/{id}",[\App\Http\Controllers\OrderController::class,'deleteOrder']);
