@@ -17,7 +17,6 @@ class Admin extends Authenticatable
         'password',
     ];
 
-    // Other model properties and methods, if needed
     protected $hidden = [
         'password',
         'remember_token',
