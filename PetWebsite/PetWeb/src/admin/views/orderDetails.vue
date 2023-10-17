@@ -36,12 +36,12 @@ onMounted (async() => {
       </thead>
       <tbody>
         <tr  v-for="order in ordersDetails" :key="order[i]" class="text-xs">
-        <td class="border border-gray-200 underline " >  {{order.id}}</td>
-          <td class="border border-gray-200">{{order.product.name }}</td>
-          <td class="border border-gray-200">{{ order.product.sku }}</td>
-          <td class="border border-gray-200">{{order.product.category }}</td>
-          <td class="border border-gray-200"><img :src="order.product.image_path"  alt="Product Image" class="h-12 w-12 object-cover"/></td>
-          <td class="border border-gray-200">{{order.quantity }}</td>
+        <td class="border border-gray-200 text-center " >  {{order.id}}</td>
+          <td class="border border-gray-200 text-center">{{order.product.name }}</td>
+          <td class="border border-gray-200 text-center">{{ order.product.sku }}</td>
+          <td class="border border-gray-200 text-center">{{order.product.category }}</td>
+          <td class="border border-gray-200 "><img :src="order.product.image_path"  alt="Product Image" class="h-12 w-12 object-cover mx-auto"/></td>
+          <td class="border border-gray-200 text-center">{{order.quantity }}</td>
         
       
 
