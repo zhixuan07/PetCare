@@ -9,4 +9,10 @@ class Product extends Model
 {
     use HasFactory;
     protected $fillable = ['sku','name', 'description', 'price','brand', 'image_path','stock','category','ingredients'];
+
+    public function orderDetails()
+    {
+       return $this->hasOne(OrderDetails::class);
+    }
+
 }

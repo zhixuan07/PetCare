@@ -17,9 +17,14 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
+    public function order()
+    {
+        return $this->hasMany(Order::class,'user_id');
+    }
     protected $fillable = [
         'name',
         'password',
+        'email'
     ];
 
     /**
@@ -28,8 +33,9 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $hidden = [
-
         'remember_token',
+        'password',
+
     ];
 
     /**
