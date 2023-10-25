@@ -7,12 +7,7 @@
       <p>Email: info@petcare.com</p>
     </div>
 
-    <div class="quick-links">
-      <h3>Quick Links</h3>
-      <p><router-link to="/faq">FAQ</router-link></p>
-      <p><router-link to="/about">About Us</router-link></p>
-      <p><router-link to="/contact">Contact</router-link></p>
-    </div>
+    
 
     <div class="social-media">
       <h3>Follow Us</h3>

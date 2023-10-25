@@ -3,10 +3,11 @@ import { createRouter, createWebHistory } from "vue-router";
 const router = createRouter({
     history: createWebHistory(),
     routes: [
+        
         {
-            path: "/",
+            path: "/home",
             name: "Home",
-            component: () => import("../users/views/Home.vue"),
+            component: () => import("../users/views/Homepage.vue"),
         },
         {
             path: "/login",
@@ -18,6 +19,57 @@ const router = createRouter({
             name: "Register",
             component: () => import("../users/views/Register.vue"),
         },
+        {
+            path: "/cart",
+            name: "Cart",
+            component: () => import("../users/views/Cart.vue"),
+        },
+        {
+            path: "/food",
+            name: "Food",
+            component: () => import("../users/views/Food.vue"),
+        },
+        {
+            path: "/all",
+            name: "All",
+            component: () => import("../users/views/All.vue"),
+        },
+        {
+            path: "/product",
+            name: "Product",
+            component: () => import("../users/views/Product.vue"),
+        },
+        {
+            path: "/services",
+            name: "Services",
+            component: () => import("../users/views/Services.vue"),
+        },
+        {
+            path: "/checkout",
+            name: "Checkout",
+            component: () => import("../users/views/Checkout.vue"),
+        },
+        {
+            path: "/groomingdate",
+            name: "GroomingDate",
+            component: () => import("../users/views/GroomingDate.vue"),
+        },
+        {
+            path: "/groomingtime",
+            name: "GroomingTime",
+            component: () => import("../users/views/GroomingTime.vue"),
+        },
+        {
+            path: "/test",
+            name: "Test",
+            component: () => import("../users/views/Test.vue"),
+        },
+        {
+            path: "/test2",
+            name: "Test2",
+            component: () => import("../users/views/Test2.vue"),
+        },
+
 
         {
             path: "/auth",
