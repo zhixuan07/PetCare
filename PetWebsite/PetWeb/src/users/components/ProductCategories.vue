@@ -3,64 +3,35 @@
     <h1 class="category-header">Product Categories</h1>
     <div class="category" @mouseover="highlightCategory" @mouseleave="unhighlightCategory">
       <div class="category-icon-container">
-        <img src="../assets/icon1.svg" alt="Category 1" class="category-icon" />
+        <img src="../assets/icon1.svg" alt="Dog Supplies" class="category-icon" />
       </div>
-      <p>Category 1 Description</p>
+      <p>Dog Supplies</p>
     </div>
     <div class="category" @mouseover="highlightCategory" @mouseleave="unhighlightCategory">
       <div class="category-icon-container">
-        <img src="../assets/icon2.svg" alt="Category 2" class="category-icon" />
+        <img src="../assets/icon2.svg" alt="Cat Supplies" class="category-icon" />
       </div>
-      <p>Category 2 Description</p>
+      <p>Cat Supplies</p>
     </div>
     <div class="category" @mouseover="highlightCategory" @mouseleave="unhighlightCategory">
       <div class="category-icon-container">
-        <img src="../assets/icon2.svg" alt="Category 2" class="category-icon" />
+        <img src="../assets/icon2.svg" alt="Pet Grooming" class="category-icon" />
       </div>
-      <p>Category 2 Description</p>
+      <p>Pet Grooming</p>
     </div>
     <div class="category" @mouseover="highlightCategory" @mouseleave="unhighlightCategory">
       <div class="category-icon-container">
-        <img src="../assets/icon2.svg" alt="Category 2" class="category-icon" />
+        <img src="../assets/icon2.svg" alt="Pet Hotel" class="category-icon" />
       </div>
-      <p>Category 2 Description</p>
+      <p>Pet Hotel</p>
     </div>
     <div class="category" @mouseover="highlightCategory" @mouseleave="unhighlightCategory">
       <div class="category-icon-container">
-        <img src="../assets/icon2.svg" alt="Category 2" class="category-icon" />
+        <img src="../assets/icon2.svg" alt="Pet Daycare" class="category-icon" />
       </div>
-      <p>Category 2 Description</p>
+      <p>Pet Daycare</p>
     </div>
-    <div class="category" @mouseover="highlightCategory" @mouseleave="unhighlightCategory">
-      <div class="category-icon-container">
-        <img src="../assets/icon2.svg" alt="Category 2" class="category-icon" />
-      </div>
-      <p>Category 2 Description</p>
-    </div>
-    <div class="category" @mouseover="highlightCategory" @mouseleave="unhighlightCategory">
-      <div class="category-icon-container">
-        <img src="../assets/icon2.svg" alt="Category 2" class="category-icon" />
-      </div>
-      <p>Category 2 Description</p>
-    </div>
-    <div class="category" @mouseover="highlightCategory" @mouseleave="unhighlightCategory">
-      <div class="category-icon-container">
-        <img src="../assets/icon2.svg" alt="Category 2" class="category-icon" />
-      </div>
-      <p>Category 2 Description</p>
-    </div>
-    <div class="category" @mouseover="highlightCategory" @mouseleave="unhighlightCategory">
-      <div class="category-icon-container">
-        <img src="../assets/icon2.svg" alt="Category 2" class="category-icon" />
-      </div>
-      <p>Category 2 Description</p>
-    </div>
-    <div class="category" @mouseover="highlightCategory" @mouseleave="unhighlightCategory">
-      <div class="category-icon-container">
-        <img src="../assets/icon2.svg" alt="Category 2" class="category-icon" />
-      </div>
-      <p>Category 2 Description</p>
-    </div>
+    
     
     
     
