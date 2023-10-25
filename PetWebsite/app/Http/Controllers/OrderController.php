@@ -51,6 +51,12 @@ class OrderController extends Controller
         return response() ->json(['message'=>'Order update successfully']);
     }
 
+    public function getTotalOrder()
+    {
+        $order = Order::count();
+        return response() ->json(['total_order'=> $order]);
+    }
+
 
 
 }

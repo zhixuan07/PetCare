@@ -29,3 +29,4 @@ Route::get("/admin/orders",[OrderController::class,'showAllOrders']);
 Route::get("/admin/orders/{id}",[OrderController::class,'showOrderDetails']);
 Route::patch("/admin/deleteOrder/{id}",[OrderController::class,'deleteOrder']);
 Route::post('/admin/updateOrder/{id}',[OrderController::class,'updateStatus']);
+Route::get('/admin/getTotalOrder',[OrderController::class,'getTotalOrder']);
