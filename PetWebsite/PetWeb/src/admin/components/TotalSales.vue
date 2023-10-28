@@ -4,9 +4,9 @@ import axiosClient from '../axiosClient';
 
 const total_order =ref()
 onMounted (async () =>{
-    await axiosClient.get('/admin/getTodayOrder').then((res)=>
+    await axiosClient.get('/admin/getTotalOrder').then((res)=>
     {
-        total_order.value = res.data.today_order;
+        total_order.value = res.data.total_order;
     });
 })
 
@@ -14,7 +14,7 @@ onMounted (async () =>{
 <template>
     <div class="flex items-center justify-between">
         <div class="p-4">
-            <p class="font-semibold text-gray-500">Today Orders</p>
+            <p class="font-semibold text-gray-500">Total Orders</p>
             <p class="mt-2 font-bold text-2xl text-gray-500">{{ total_order }}</p>
         </div>
         <div class="mr-3">

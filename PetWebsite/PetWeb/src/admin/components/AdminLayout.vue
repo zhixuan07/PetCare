@@ -21,7 +21,7 @@ const toggleNav   = () => {
     >
        
         <div
-            class="w-full pr-3 flex flex-col gap-y-1 text-gray-500 fill-gray-500 text-sm"
+            class="w-full pr-3 pl-4 flex flex-col gap-y-1 text-gray-500 fill-gray-500 text-sm"
         >
             <div
                 class="font-QuicksandMedium pl-4 text-gray-400/60 flex gap-2  items-center text-[15px] uppercase"
@@ -106,7 +106,7 @@ const toggleNav   = () => {
 
         <!-- menu items -->
         <div
-            class="w-full pr-3 flex flex-col gap-y-1 text-gray-500 fill-gray-500 text-sm"
+            class="w-full pr-3 pl-4 flex flex-col gap-y-1 text-gray-500 fill-gray-500 text-sm"
         >
             <div
                 class="font-QuicksandMedium pl-4 text-gray-400/60 text-xs text-[11px] uppercase"

@@ -6,7 +6,7 @@
   
     <nav class="navigation">
       <!-- Navigation links -->
-      <router-link to="/home">HOME</router-link>
+      <router-link to="/">HOME</router-link>
       <router-link to="/all">ALL</router-link>
       <router-link to="/food">FOOD</router-link>
       <router-link to="/grooming">GROOMING</router-link>
