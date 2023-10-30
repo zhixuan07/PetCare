@@ -4,6 +4,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use \App\Http\Controllers\OrderController;
 use \App\Http\Controllers\ProductController;
+use \App\Http\Controllers\userAuthController;
+use \App\Http\Controllers\adminAuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,13 +18,20 @@ use \App\Http\Controllers\ProductController;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::middleware('auth:sanctum')->group(function (){
+    Route::get('/user', function (Request $request) {
+        return $request->user();
+    });
+    Route::post('/logout',[AuthController::class,'logout']);
+
 });
 
 Route::post('/adminLogin',[adminAuthController::class,'login']);
+Route::post('/userLogin',[userAuthController::class,'login']);
+Route::post('/userRegister',[userAuthController::class,'register']);
 Route::get('/products', [ProductController::class,'index']);
 Route::post('/products/add', [ProductController::class,'store']);
+Route::get('/product/{id}', [ProductController::class,'show']);
 Route::delete('/products/{id}', [ProductController::class,'destroy']);
 Route::post('/products/update/{id}', [ProductController::class,'update']);
 Route::get("/admin/orders",[OrderController::class,'showAllOrders']);

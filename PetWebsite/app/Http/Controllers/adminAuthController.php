@@ -56,6 +56,7 @@ class adminAuthController
 
         return response()->json([
             'user'=>$user,
+
             'message'=>'Success'
 
         ],200);

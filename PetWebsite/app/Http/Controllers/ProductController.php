@@ -28,7 +28,7 @@ class ProductController
         }
 
         // Load a view to display the product details
-        return view('products.show', ['product' => $product]);
+       return response()->json(["product"=>$product]);
     }
     public function store(Request $request): \Illuminate\Http\JsonResponse
     {

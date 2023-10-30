@@ -1,6 +1,83 @@
 <script setup>
+import { ref } from "vue";
+import { useRouter } from "vue-router";
+import {useUserStore} from "../stores/user";
+
+
+const router = useRouter();
+const errmsg = ref(null);
+const  store = useUserStore();
+
+const user = {
+    name:'',
+    email: '',
+    password: '',
+ 
+   
+}
+
+function register(ev) {
+  ev.preventDefault();
+   store.register(user)
+   router.push("/")
+
+}
 
 </script>
 <template>
-<h1>Hello world</h1>
+    
+        <div class="flex flex-col items-center justify-center h-full">
+            <h1 class="text-5xl text-white font-bold mb-4">PetWeb</h1>
+            <h2 class="text-2xl text-white font-bold mb-8">User Register</h2>
+
+            <form class="bg-white p-8 rounded-lg shadow-md" @submit=register>
+                <div class="mb-4">
+                    <label class="text-gray-800 block mb-2"
+                        >Name:</label
+                    >
+                    <input
+                        type="text"
+                        v-model="user.name"
+                        name="username"
+                        class="w-full p-2 border border-gray-300 rounded"
+                        placeholder="Enter your username"
+                        required
+                    />
+                </div>
+                <div class="mb-4">
+                    <label class="text-gray-800 block mb-2"
+                        >Email:</label
+                    >
+                    <input
+                        type="email"
+                        v-model="user.email"
+                        name="email"
+                        class="w-full p-2 border border-gray-300 rounded"
+                        placeholder="Enter your username"
+                        required
+                    />
+                </div>
+                <div class="mb-4">
+                    <label class="text-gray-800 block mb-2"
+                        >Password:</label
+                    >
+                    <input
+                        type="password"
+                        v-model="user.password"
+                        name="password"
+                        class="w-full p-2 border border-gray-300 rounded"
+                        placeholder="Enter your password"
+                        required
+                    />
+                </div>
+                <button
+                    type="submit"
+                    class="bg-theme text-white  bg-red-400 text-lg font-semibold py-2 px-4 rounded-lg hover:bg-opacity-80"
+                >
+                    Register
+                </button>
+                <p class="text-red-500 text-sm mt-2">{{errmsg}}</p>
+            </form>
+        </div>
+   
 </template>
