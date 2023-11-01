@@ -56,18 +56,22 @@
 import Header from '../components/Header.vue';
 import Footer from '../components/Footer.vue';
 import { useCartStore } from '../stores/cart';
+import { toast } from 'vue3-toastify';
+import 'vue3-toastify/dist/index.css';
+import{useRouter} from 'vue-router';
 import { computed, onMounted, ref, watch } from 'vue';
 
 const store = useCartStore();
-
-
-
-
-
+const router = useRouter();
 const proceedToCheckout=() =>{
-      // Handle the checkout process here (no back-end logic)
-      // You can navigate to the payment page or perform other actions as needed
+  if(store.getCartItems.length==0){
+    toast.warning('Your cart is empty', {position: 'top-right', duration: 1000});
+    return;
+  }else{
+    router.push({name:'Checkout'});
   }
+
+}
 
 onMounted(() => {
 

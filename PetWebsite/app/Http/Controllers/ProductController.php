@@ -48,7 +48,7 @@ class ProductController
         );
 
 
-        $product =Product::create([
+        $product = Product::create([
             'sku'=>$validatedData['sku'],
             'name'=>$validatedData['name'],
             'description'=>$validatedData['description'],

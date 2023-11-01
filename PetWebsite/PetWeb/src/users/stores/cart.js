@@ -18,22 +18,36 @@ export const useCartStore = defineStore('cart', {
         setCartItems(items) {
             this.cartItems = items;
         },
-        addToCart(item) {
+        addToCart(item,quantity) {
             const index = this.cartItems.findIndex(product => product.id === item.id);
             if(index !== -1) {
          
-              this.cartItems[index].quantity += 1;
+              this.cartItems[index].quantity += quantity;
                 localStorage.setItem('cart', JSON.stringify(this.cartItems));
              alert("Item have added in cart");
             
             }else {
-              item.quantity = 1;
+              item.quantity = quantity;
               this.cartItems.push(item);
               localStorage.setItem('cart', JSON.stringify(this.cartItems));
                 
                 alert("Item added to cart");
             }
            
+        },
+        buyNow(item,quantity) {
+            const index = this.cartItems.findIndex(product => product.id === item.id);
+            if(index !== -1) {
+
+              this.cartItems[index].quantity += quantity;
+              localStorage.setItem('cart', JSON.stringify(this.cartItems));
+            
+            }else {
+              item.quantity = quantity;
+              this.cartItems.push(item);
+              localStorage.setItem('cart', JSON.stringify(this.cartItems));
+            }
+
         },
         removeFromCart(item) {
             this.cartItems = this.cartItems.filter(product => product.id !== item.id);
@@ -49,14 +63,21 @@ export const useCartStore = defineStore('cart', {
           
           },
         calculateItemTotal (item) {
-            return item.price * item.quantity;
+          const total = item.price * item.quantity;
+          return total
           },
          calculateSubTotal () {
-            return this.cartItems.reduce((total, item) => total + this.calculateItemTotal(item), 0);
+            const total = this.cartItems.reduce((total, item) => total + this.calculateItemTotal(item), 0).toFixed(2);
+            return total
           },
           loadCartItemsFromLocalStorage() {
             const items = JSON.parse(localStorage.getItem('cart')) || [];
             this.setCartItems(items); // Call the mutation to set cart items
+          },
+          clearCart() {
+            this.cartItems = [];
+            localStorage.setItem('cart', JSON.stringify(this.cartItems));
+           
           }
          
         

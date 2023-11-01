@@ -33,6 +33,7 @@ export const useUserStore = defineStore("user", {
             this.isAuth = false;
             localStorage.removeItem("token");
             localStorage.removeItem("user");
+            localStorage.removeItem("cart");
         },
         loadUserFromLocalStorage() {
             const token = localStorage.getItem("token");
@@ -49,10 +50,10 @@ export const useUserStore = defineStore("user", {
                     if(res.data){
                         console.log(res.data);
                         
-                        this.setUser(res.data);
+                        this.setUser(res.data.user);
                         this.setIsAuth(true);
-                    
-                        localStorage.setItem("user", JSON.stringify(res.data));
+                        localStorage.setItem("user", JSON.stringify(res.data.user));
+                        localStorage.setItem("token", JSON.stringify(res.data.token));
                     }
                 })
             }
@@ -71,15 +72,12 @@ export const useUserStore = defineStore("user", {
                         this.setUser(res.data);
                         this.setIsAuth(true);
                         localStorage.setItem("user", JSON.stringify(res.data));
+                        localStorage.setItem("token", JSON.stringify(res.data.token));
                         
                     }
                 })
             }
-            this.setToken(user.token);
-            this.setUser(user);
-            this.setIsAuth(true);
-            localStorage.setItem("token", user.token);
-            localStorage.setItem("user", JSON.stringify(user));
+          
         }
         
     },

@@ -6,7 +6,7 @@ use \App\Http\Controllers\OrderController;
 use \App\Http\Controllers\ProductController;
 use \App\Http\Controllers\userAuthController;
 use \App\Http\Controllers\adminAuthController;
-
+use \App\Http\Controllers\checkOutController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -29,6 +29,7 @@ Route::middleware('auth:sanctum')->group(function (){
 Route::post('/adminLogin',[adminAuthController::class,'login']);
 Route::post('/userLogin',[userAuthController::class,'login']);
 Route::post('/userRegister',[userAuthController::class,'register']);
+Route::post('/checkout',[checkOutController::class,'checkout']);
 Route::get('/products', [ProductController::class,'index']);
 Route::post('/products/add', [ProductController::class,'store']);
 Route::get('/product/{id}', [ProductController::class,'show']);

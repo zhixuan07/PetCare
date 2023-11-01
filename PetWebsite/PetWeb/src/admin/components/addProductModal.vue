@@ -130,6 +130,7 @@ function add(){
                     <option value="Dog Food">Dog Food</option>
                     <option value="Cat Food">Cat Food</option>
                     <option value="Dog Cage">Dog Cage</option>
+                    <option value="Toy">Toy</option>
                 </select>
             </div>
             <div class="mb-4">

@@ -79,9 +79,7 @@
                     <div class="card-body">
                         <h2 class="card-title">{{ product.name }}</h2>
                         
-                        <div class="card-actions justify-end">
-                            <button class="btn btn-primary">Buy Now</button>
-                        </div>
+                      
                     </div>
                 </div>
                

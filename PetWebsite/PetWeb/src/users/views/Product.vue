@@ -25,19 +25,19 @@
                             <p class="unit-price">Unit Price: RM{{ product.price }}</p>
                             <div class="quantity-control">
                                 <button @click="decrementQty">-</button>
-                                <span class="quantity">1</span>
+                                <span class="quantity" >{{ quantity }}</span>
                                 <button @click="incrementQty">+</button>
                             </div>
                             <div class="d-flex flex-column align-items-center">
                                 <!-- Use Bootstrap's d-flex and flex-column classes -->
                                 <button
-                                    @click="store.addToCart(product)"
+                                    @click="store.addToCart(product,quantity)"
                                     class="btn btn-primary mb-2 custom-button"
                                 >
                                     Add to Cart
                                 </button>
                                 <button
-                                    @click="buyNow"
+                                    @click="buynow(product,quantity)"
                                     class="btn btn-success custom-button"
                                 >
                                     Buy Now
@@ -61,7 +61,7 @@ import Header from "../components/Header.vue";
 import Footer from "../components/Footer.vue";
 import axiosClient from "../../admin/axiosClient";
 import { useCartStore } from "../stores/cart";
-import { RouterLink,useRoute } from 'vue-router';
+import { RouterLink,useRoute,useRouter } from 'vue-router';
 import {ref,onMounted,computed} from "vue";
 
 const store = useCartStore();
@@ -71,6 +71,8 @@ function loadCartItemsFromLocalStorage() {
 }
 const cartItems = computed(() => store.getCartItems);
 const route = useRoute();
+const router = useRouter();
+const quantity = ref(1);
 const product =ref({
   id:"",
   name: "",
@@ -106,18 +108,20 @@ onMounted(()=>{
 
 
 const incrementQty = () => {
-    // Implement logic to increment quantity
-    this.quantity++;
+    
+    quantity.value++;
 };
 const decrementQty = () => {
-    if (this.quantity > 1) {
-        this.quantity--;
+    if (quantity.value > 1) {
+        quantity.value--;
     }
     // Implement logic to decrement quantity
 };
 
-const buyNow = () => {
-    // Implement logic to initiate the purchase immediately
+const buynow= (product,quantity) => {
+    // Implement logic to buy now
+    store.buyNow(product,quantity);
+    router.push("/cart");
 };
 </script>
 

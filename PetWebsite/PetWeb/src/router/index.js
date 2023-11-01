@@ -1,5 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
 
+
+
 const router = createRouter({
     history: createWebHistory(),
     routes: [
@@ -7,7 +9,13 @@ const router = createRouter({
         {
             path: "/",
             name: "Home",
+            meta: { isGuest: true },
             component: () => import("../users/views/Homepage.vue"),
+            children: [ 
+               
+            ],
+
+
         },
         {
             path: "/login",
@@ -19,6 +27,7 @@ const router = createRouter({
             name: "Register",
             component: () => import("../users/views/Register.vue"),
         },
+        
         {
             path: "/cart",
             name: "Cart",
@@ -119,9 +128,8 @@ const router = createRouter({
     ],
 });
 router.beforeEach((to, from, next) => {
-    
-        next();
-    
+next()
+   
 });
 
 export default router;
