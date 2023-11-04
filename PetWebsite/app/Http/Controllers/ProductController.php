@@ -28,7 +28,7 @@ class ProductController
         }
 
         // Load a view to display the product details
-        return view('products.show', ['product' => $product]);
+       return response()->json(["product"=>$product]);
     }
     public function store(Request $request): \Illuminate\Http\JsonResponse
     {
@@ -48,7 +48,7 @@ class ProductController
         );
 
 
-        $product =Product::create([
+        $product = Product::create([
             'sku'=>$validatedData['sku'],
             'name'=>$validatedData['name'],
             'description'=>$validatedData['description'],
@@ -91,5 +91,9 @@ class ProductController
         $product->delete();
 
         return response()->json(['message' => 'Product deleted successfully'], 200);
+    }
+
+    public function reduceStock($product_id){
+
     }
 }

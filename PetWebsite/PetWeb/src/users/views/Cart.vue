@@ -16,115 +16,32 @@
         </thead>
         <tbody>
           <!-- Example cart items - Replace with your actual data -->
-          <tr>
+          <tr v-for="item in store.getCartItems" :key="item.id">
             <td class="product-cell">
               <div class="product-info">
-                <img src="../assets/square.png" alt="Product Image" class="product-image" />
+                <img :src="item.image_path" alt="Product Image" class="product-image" />
                 
               </div>
               <div class="product-details">
-                  <p class="product-name">Product 1</p>
-                  <p class="unit-price">RM 10.99</p>
+                  <p class="product-name">{{ item.name }}</p>
+                  <p class="unit-price">RM {{ item.price }}</p>
               </div>
             </td>
             
             <td class="quantity-cell">
-              <input type="number" value="1" min="1"  />
-              <button @click="removeItem(0)" class="remove-item">Remove</button>
+              <input type="number" v-model="item.quantity" min="1"  @input="store.updateItemQuantity(item,$event)"/>
+              <button @click="store.removeFromCart(item)" class="remove-item">Remove</button>
             </td>
 
-            <td class="total-cell">RM 10.99</td>
+            <td class="total-cell">RM {{ store.calculateItemTotal(item)  }}</td>
           </tr>
 
-          <!-- Example cart items - Replace with your actual data -->
-          <tr>
-            <td class="product-cell">
-              <div class="product-info">
-                <img src="../assets/square.png" alt="Product Image" class="product-image" />
-                
-              </div>
-              <div class="product-details">
-                  <p class="product-name">Product 1</p>
-                  <p class="unit-price">RM 10.99</p>
-              </div>
-            </td>
-            
-            <td class="quantity-cell">
-              <input type="number" value="1" min="1"  />
-              <button @click="removeItem(0)" class="remove-item">Remove</button>
-            </td>
-            
-            <td class="total-cell">RM 10.99</td>
-          </tr>
-
-          <!-- Example cart items - Replace with your actual data -->
-          <tr>
-            <td class="product-cell">
-              <div class="product-info">
-                <img src="../assets/square.png" alt="Product Image" class="product-image" />
-                
-              </div>
-              <div class="product-details">
-                  <p class="product-name">Product 1</p>
-                  <p class="unit-price">RM 10.99</p>
-              </div>
-            </td>
-            
-            <td class="quantity-cell">
-              <input type="number" value="1" min="1"  />
-              <button @click="removeItem(0)" class="remove-item">Remove</button>
-            </td>
-            
-            <td class="total-cell">RM 10.99</td>
-          </tr>
-
-          <!-- Example cart items - Replace with your actual data -->
-          <tr>
-            <td class="product-cell">
-              <div class="product-info">
-                <img src="../assets/square.png" alt="Product Image" class="product-image" />
-                
-              </div>
-              <div class="product-details">
-                  <p class="product-name">Product 1</p>
-                  <p class="unit-price">RM 10.99</p>
-              </div>
-            </td>
-            
-            <td class="quantity-cell">
-              <input type="number" value="1" min="1"  />
-              <button @click="removeItem(0)" class="remove-item">Remove</button>
-            </td>
-            
-            <td class="total-cell">RM 10.99</td>
-          </tr>
-
-          <!-- Example cart items - Replace with your actual data -->
-          <tr>
-            <td class="product-cell">
-              <div class="product-info">
-                <img src="../assets/square.png" alt="Product Image" class="product-image" />
-                
-              </div>
-              <div class="product-details">
-                  <p class="product-name">Product 1</p>
-                  <p class="unit-price">RM 10.99</p>
-              </div>
-            </td>
-            
-            <td class="quantity-cell">
-              <input type="number" value="1" min="1"  />
-              <button @click="removeItem(0)" class="remove-item">Remove</button>
-            </td>
-            
-            <td class="total-cell">RM 10.99</td>
-          </tr>
           
         </tbody>
       </table>
 
-      <div class="subtotal">
-        <p>Subtotal: RM 50.97</p>
+      <div class="subtotal"  >
+        <p>SUBTOTAL: RM {{ store.calculateSubTotal() }}</p>
       </div>
 
       <button class="checkout-button" @click="proceedToCheckout">Checkout</button>
@@ -135,26 +52,32 @@
   </div>
 </template>
 
-<script>
+<script setup>
 import Header from '../components/Header.vue';
 import Footer from '../components/Footer.vue';
+import { useCartStore } from '../stores/cart';
+import { toast } from 'vue3-toastify';
+import 'vue3-toastify/dist/index.css';
+import{useRouter} from 'vue-router';
+import { computed, onMounted, ref, watch } from 'vue';
 
-export default {
-  components: {
-    Header,
-    Footer,
-  },
-  methods: {
-    removeItem(index) {
-      // Remove the item from the view (no back-end logic)
-      // You can also update your cart data if you have a Vuex store or similar
-    },
-    proceedToCheckout() {
-      // Handle the checkout process here (no back-end logic)
-      // You can navigate to the payment page or perform other actions as needed
-    },
-  },
-};
+const store = useCartStore();
+const router = useRouter();
+const proceedToCheckout=() =>{
+  if(store.getCartItems.length==0){
+    toast.warning('Your cart is empty', {position: 'top-right', duration: 1000});
+    return;
+  }else{
+    router.push({name:'Checkout'});
+  }
+
+}
+
+onMounted(() => {
+
+  store.loadCartItemsFromLocalStorage();
+  });
+
 </script>
 
 <style scoped>

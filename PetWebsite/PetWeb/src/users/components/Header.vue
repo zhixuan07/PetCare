@@ -6,17 +6,10 @@
   
     <nav class="navigation">
       <!-- Navigation links -->
-      <router-link to="/home">HOME</router-link>
-      <router-link to="/all">ALL</router-link>
-      <router-link to="/food">FOOD</router-link>
-      <router-link to="/grooming">GROOMING</router-link>
-      <router-link to="/toys">TOYS</router-link>
-      <router-link to="/services">PET SERVICES</router-link>
-      <router-link to="/product">individuall product test</router-link>
-      <router-link to="/checkout">checkout test</router-link>
-
-      <router-link to="/test">test page from gpt</router-link>
-      <router-link to="/test2">test page 2</router-link>
+      <router-link to="/">Home</router-link>
+      <router-link to="/products">Products</router-link>
+      <router-link to="/about">About Us</router-link>
+      <router-link to="/contact">Contact</router-link>
     </nav>
     <div class="actions">
       
@@ -28,25 +21,6 @@
     </div>
   </header>
 </template>
-
-
-
-
-<script>
-
-export default {
-  components: {
-  },
-  data() {
-    return {
-      
-    };
-  },
-  methods: {
-    
-  },
-};
-</script>
 
 
 <style scoped>

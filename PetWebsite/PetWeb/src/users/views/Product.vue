@@ -2,76 +2,132 @@
     <div class="product">
         <!-- Header Component -->
         <Header />
-        
-        <div class="product-page">
-          <div class="container ">
-            <div class="row">
-              <div class="col-md-6">
-                <!-- Image Gallery -->
-                <div class="image-gallery">
-                  <!-- Render each image -->
-                  <div class="image-item">
-                    <img src="../assets/square.png" alt="Image 1" />
-                  </div>
-                  
+
+        <div class="product-page"  >
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+                        <!-- Image Gallery -->
+                        <div class="image-gallery">
+                            <!-- Render each image -->
+                            <div class="image-item">
+                                <img :src="product.image_path" alt="Image 1" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <h1 class="font-bold text-xl">{{ product.name }}</h1>
+                      <p class="product-description">
+                               {{ product.description }}
+                            </p>
+                        <!-- Product Information -->
+                        <div class="product-info">
+                            <h1 class="product-title"></h1>
+                            <p class="unit-price mt-5">Unit Price: RM{{ product.price }}</p>
+                            <div class="quantity-control">
+                                <button @click="decrementQty">-</button>
+                                <span class="quantity" >{{ quantity }}</span>
+                                <button @click="incrementQty">+</button>
+                            </div>
+                            <div class="flex flex-row gap-10 items-center justify-center mt-5">
+                                <!-- Use Bootstrap's d-flex and flex-column classes -->
+                                <button
+                                    @click="store.addToCart(product,quantity)"
+                                    class="btn btn-primary mb-2 custom-button"
+                                >
+                                    Add to Cart
+                                </button>
+                                <button
+                                    @click="buynow(product,quantity)"
+                                    class="btn btn-success custom-button"
+                                >
+                                    Buy Now
+                                </button>
+                            </div>
+                        
+                        </div>
+                    </div>
                 </div>
-              </div>
-              <div class="col-md-6">
-                <!-- Product Information -->
-                <div class="product-info">
-                  <h1 class="product-title">Product Name</h1>
-                  <p class="unit-price">Unit Price: $19.99</p>
-                  <div class="quantity-control ">
-                    <button @click="decrementQty">-</button>
-                    <span class="quantity">1</span>
-                    <button @click="incrementQty">+</button>
-                  </div>
-                  <div class="d-flex flex-column align-items-center"> <!-- Use Bootstrap's d-flex and flex-column classes -->
-                    <button @click="addToCart" class="btn btn-primary mb-2 custom-button">Add to Cart</button>
-                    <button @click="buyNow" class="btn btn-success custom-button">Buy Now</button>
-                  </div>
-                  <p class="product-description">Product Description goes here.</p>
-                </div>
-              </div>
             </div>
-          </div>
         </div>
+     
+            <Review/>
+
+      
   
         <!-- Footer Component -->
         <Footer />
     </div>
 </template>
-  
-<script>
-    import Header from '../components/Header.vue';
-    import Footer from '../components/Footer.vue';
+
+<script setup>
+import Header from "../components/Header.vue";
+import Footer from "../components/Footer.vue";
+import Review from "../components/Review.vue";
+import axiosClient from "../../admin/axiosClient";
+import { useCartStore } from "../stores/cart";
+import { RouterLink,useRoute,useRouter } from 'vue-router';
+import {ref,onMounted,computed} from "vue";
+
+const store = useCartStore();
+function loadCartItemsFromLocalStorage() {
+  const items = JSON.parse(localStorage.getItem('cart')) || [];
+  store.setCartItems(items); // Call the mutation to set cart items
+}
+const cartItems = computed(() => store.getCartItems);
+const route = useRoute();
+const router = useRouter();
+const quantity = ref(1);
+const product =ref({
+  id:"",
+  name: "",
+  description:"",
+  price:"",
+  image_path:"",
+  brand:"",
+  category:"",
+  stock:"",
+  ingredients:"",
+
+});
+
+onMounted(()=>{
+    axiosClient.get(`/product/${route.params.id}`).then((res) => {
+        const response= res.data.product;
+      product.value = {
+        id:response.id,
+        name:response.name,
+        description:response.description,
+        price:response.price,
+        image_path:response.image_path,
+        brand:response.brand,
+        category:response.category,
+        stock:response.stock,
+        ingredients:response.ingredients,
+      }
+      loadCartItemsFromLocalStorage();
+      
+    });
+})
 
 
-    export default {
-        components: {
-            Header,
-            Footer,
-        },
-        
-        methods: {
-          incrementQty() {
-          // Implement logic to increment quantity
-            this.quantity++;
-          },
-          decrementQty() {
-            if (this.quantity > 1) {
-                this.quantity--;
-            }
-          // Implement logic to decrement quantity
-          },
-          addToCart() {
-          // Implement logic to add the product to the cart
-          },
-          buyNow() {
-          // Implement logic to initiate the purchase immediately
-          },
-        },
-    };
+
+const incrementQty = () => {
+    
+    quantity.value++;
+};
+const decrementQty = () => {
+    if (quantity.value > 1) {
+        quantity.value--;
+    }
+    // Implement logic to decrement quantity
+};
+
+const buynow= (product,quantity) => {
+    // Implement logic to buy now
+    store.buyNow(product,quantity);
+    router.push("/cart");
+};
 </script>
 
 
