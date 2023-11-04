@@ -193,6 +193,14 @@ const buynow= (product,quantity) => {
 .product-description {
   margin-top: 20px;
 }
+
+
+@media screen and (max-width: 768px) {
+  .product-page {
+    margin: 15px 15px 200px 15px;
+  }
+
+}
 </style>
 
 

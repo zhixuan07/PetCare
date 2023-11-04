@@ -27,7 +27,7 @@
 .footer {
   background-color: #333;
   color: #fff;
-  padding: 30px 0;
+  padding: 30px;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;

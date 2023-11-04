@@ -156,9 +156,10 @@ onMounted(() => {
     width: 45%;
     padding: 40px;
     border: 1px solid #ccc;
-}
-
-.checkout-title {
+    border-radius: 5px;
+  }
+  
+  .checkout-title {
     font-size: 24px;
     margin-bottom: 20px;
 }
@@ -197,7 +198,6 @@ textarea {
     border-radius: 5px;
     cursor: pointer;
     font-size: 18px;
-    width: 280px;
   }
   
   button.checkout-button:hover {
@@ -209,6 +209,7 @@ textarea {
     width: 45%;
     padding: 40px;
     border: 1px solid #ccc;
+    border-radius: 5px;
   }
   
   .summary-title {
@@ -233,6 +234,27 @@ textarea {
     font-size: 18px;
     font-weight: bold;
   }
+  
+  /* Media query for mobile */
+  @media screen and (max-width: 768px) {
+    .checkout-page {
+      flex-direction: column;
+      margin: 30px 30px 200px 30px;
+    }
+
+    .cart-summary,
+    .checkout-container {
+      width: 100%;
+      padding: 20px;
+      margin-bottom: 30px;
+    }
+
+
+    
+
+    
+  }
+
   
   </style>
   

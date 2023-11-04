@@ -3,14 +3,14 @@
         <!-- Header Component -->
         <Header />
     
-        <div class="date-selection-page">
-            <h1 class="title">Select a Date</h1>
+        <div class="time-selection-page">
+            <h1 class="title">Select a Time</h1>
             
             <!-- List of available dates -->
-            <div class="date-buttons">
+            <div class="time-buttons">
                 <!-- Loop through available dates and display date buttons -->
-                <button class="date-button" @click="selectDate(date)">Date 1</button>
-                <button class="date-button" @click="selectDate(date)">Date 2</button>
+                <button class="time-button" @click="selectTime(time)">Date 1</button>
+                <button class="time-button" @click="selecttime(time)">Date 2</button>
                 <!-- Add more date buttons here -->
             </div>
         </div>
@@ -30,7 +30,7 @@ export default {
         Footer
     },
     methods: {
-        selectDate(date) {
+        selectTime(time) {
             // Implement navigation to the Grooming Time Slot Selection page for the selected date.
         },
     },
@@ -38,12 +38,7 @@ export default {
 </script>
 
 <style scoped>
-.grooming-date-selection {
-    background-color: white;
-    color: black;
-    text-align: center;
-    padding: 20px;
-}
+
 
 .title {
     font-size: 40px;
@@ -52,20 +47,21 @@ export default {
     margin-bottom: 35px;
 }
 
-.date-selection-page {
+.time-selection-page {
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin: 30px 30px 350px 30px;
 }
 
-.date-buttons {
+.time-buttons {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     gap: 20px;
 }
 
-.date-button {
+.time-button {
     background-color: #dcdcdc; /* Grey background color */
     color: black;
     border: none;
@@ -73,5 +69,15 @@ export default {
     font-size: 16px;
     cursor: pointer;
     border-radius: 5px;
+}
+
+
+
+/* Media query for mobile */
+@media screen and (max-width: 768px) {
+    .time-selection-page {
+        
+        margin: 30px;
+    }
 }
 </style>

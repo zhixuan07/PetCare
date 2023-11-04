@@ -29,7 +29,7 @@
 .testimonials-header {
   font-weight: bold;
   color: #007f5f; /* Emerald green color */
-  font-size: 24px; /* Adjust the font size as needed */
+  font-size: 35px; /* Adjust the font size as needed */
 }
 
 .testimonial {

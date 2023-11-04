@@ -7,38 +7,39 @@
     <!-- Promotional Content Component -->
     <PromotionalContent />
     <div class="home-page">
-      <h1 class="title">BEST SELLER</h1>
+      <h1 class="title">Best-Selling Products</h1>
 
       <!--cards-->
-      <div class="row product-cards">
-          <div class="col-md-3 col-sm-6 mb-4">
-              <div class="card" @click="navigateToProductPage">
-              <img class="card-img" src="../assets/girl.jpg" alt="Product Image">
-              <p class="product-name">Product Name 1</p>
-              <p class="unit-price">RM 10.99</p>
-              </div>
-          </div>
-          <div class="col-md-3 col-sm-6 mb-4">
-              <div class="card" @click="navigateToProductPage">
-              <img class="card-img" src="../assets/girl.jpg" alt="Product Image">
-              <p class="product-name">Product Name 2</p>
-              <p class="unit-price">RM 15.99</p>
-              </div>
-          </div>
-          <div class="col-md-3 col-sm-6 mb-4">
-              <div class="card" @click="navigateToProductPage">
-              <img class="card-img" src="../assets/guy.jpg" alt="Product Image">
-              <p class="product-name">Product Name 3</p>
-              <p class="unit-price">RM 8.99</p>
-              </div>
-          </div>
-          <div class="col-md-3 col-sm-6 mb-4">
-              <div class="card" @click="navigateToProductPage">
-              <img class="card-img" src="../assets/guy.jpg" alt="Product Image">
-              <p class="product-name">Product Name 4</p>
-              <p class="unit-price">RM 12.49</p>
-              </div>
-          </div>
+      <div class="row">
+        
+        <div class="col-md-3 col-sm-6 mb-4">
+            <div class="card" @click="navigateToProductPage">
+            <img class="card-img" src="../assets/girl.jpg" alt="Product Image">
+            <p class="product-name">Product Name 1</p>
+            <p class="unit-price">RM 10.99</p>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-6 mb-4">
+            <div class="card" @click="navigateToProductPage">
+            <img class="card-img" src="../assets/girl.jpg" alt="Product Image">
+            <p class="product-name">Product Name 2</p>
+            <p class="unit-price">RM 15.99</p>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-6 mb-4">
+            <div class="card" @click="navigateToProductPage">
+            <img class="card-img" src="../assets/guy.jpg" alt="Product Image">
+            <p class="product-name">Product Name 3</p>
+            <p class="unit-price">RM 8.99</p>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-6 mb-4">
+            <div class="card" @click="navigateToProductPage">
+            <img class="card-img" src="../assets/guy.jpg" alt="Product Image">
+            <p class="product-name">Product Name 4</p>
+            <p class="unit-price">RM 12.49</p>
+            </div>
+        </div>
       </div>
       <!--end of cards-->
 
@@ -88,12 +89,20 @@ export default {
   text-align: center;
   padding: 20px;
 }
+  
+.title {
+  color: #007f5f;
+  font-size: 35px;
+  font-weight: bold;
+  margin-top: 20px;
+  margin-bottom: 35px;
+}
 
 /* Add your homepage-specific styles here */
 .card {
   display: inline-block;
   width: 100%;
-  margin: 10px;
+  margin: 0px;
   padding: 10px;
   border: 1px solid #ccc;
   text-align: center;
