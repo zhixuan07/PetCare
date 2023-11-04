@@ -7,6 +7,7 @@ use \App\Http\Controllers\ProductController;
 use \App\Http\Controllers\userAuthController;
 use \App\Http\Controllers\adminAuthController;
 use \App\Http\Controllers\checkOutController;
+use \App\Http\Controllers\reviewController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -29,6 +30,7 @@ Route::middleware('auth:sanctum')->group(function (){
 Route::post('/adminLogin',[adminAuthController::class,'login']);
 Route::post('/userLogin',[userAuthController::class,'login']);
 Route::post('/userRegister',[userAuthController::class,'register']);
+Route::GET('/review/{id}',[reviewController::class,'showReview']);
 Route::post('/checkout',[checkOutController::class,'checkout']);
 Route::get('/products', [ProductController::class,'index']);
 Route::post('/products/add', [ProductController::class,'store']);

@@ -92,4 +92,8 @@ class ProductController
 
         return response()->json(['message' => 'Product deleted successfully'], 200);
     }
+
+    public function reduceStock($product_id){
+
+    }
 }

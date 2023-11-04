@@ -16,19 +16,20 @@
                         </div>
                     </div>
                     <div class="col-md-6">
+                        <h1 class="font-bold text-xl">{{ product.name }}</h1>
                       <p class="product-description">
                                {{ product.description }}
                             </p>
                         <!-- Product Information -->
                         <div class="product-info">
                             <h1 class="product-title"></h1>
-                            <p class="unit-price">Unit Price: RM{{ product.price }}</p>
+                            <p class="unit-price mt-5">Unit Price: RM{{ product.price }}</p>
                             <div class="quantity-control">
                                 <button @click="decrementQty">-</button>
                                 <span class="quantity" >{{ quantity }}</span>
                                 <button @click="incrementQty">+</button>
                             </div>
-                            <div class="d-flex flex-column align-items-center">
+                            <div class="flex flex-row gap-10 items-center justify-center mt-5">
                                 <!-- Use Bootstrap's d-flex and flex-column classes -->
                                 <button
                                     @click="store.addToCart(product,quantity)"
@@ -49,7 +50,10 @@
                 </div>
             </div>
         </div>
+     
+            <Review/>
 
+      
   
         <!-- Footer Component -->
         <Footer />
@@ -59,6 +63,7 @@
 <script setup>
 import Header from "../components/Header.vue";
 import Footer from "../components/Footer.vue";
+import Review from "../components/Review.vue";
 import axiosClient from "../../admin/axiosClient";
 import { useCartStore } from "../stores/cart";
 import { RouterLink,useRoute,useRouter } from 'vue-router';
@@ -125,7 +130,26 @@ const buynow= (product,quantity) => {
 };
 </script>
 
+
 <style scoped>
+.bounce-enter-active {
+  animation: bounce-in 10.0s;
+}
+.bounce-leave-active {
+  animation: bounce-in 0.5s reverse;
+}
+@keyframes bounce-in {
+  0% {
+    transform: scale(0);
+  }
+  50% {
+    transform: scale(1.25);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
 .product-page {
     background-color: white;
     color: black;

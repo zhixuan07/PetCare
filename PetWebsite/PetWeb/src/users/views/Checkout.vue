@@ -126,7 +126,10 @@ const processPayment =()=>{
         console.log(res.data);
         store.clearCart();
         toast.success('Payment Success',{position:'top-right'}, {duration: 2000});
-        router.push('/');
+        setTimeout(()=>{
+            router.push('/');
+        },2000)
+       
         
     }).catch((err)=>{
         console.log(err);

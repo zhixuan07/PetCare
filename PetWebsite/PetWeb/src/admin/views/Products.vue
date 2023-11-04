@@ -146,7 +146,7 @@ const delete_product = (id) => {
                 <tr
                     v-for="product in products"
                     :key="product.id"
-                    class="text-xs"
+                    class="text-xs text-center"
                 >
                     <td class="border border-gray-200">{{ product.id }}</td>
                     <td class="border border-gray-200">{{ product.sku }}</td>

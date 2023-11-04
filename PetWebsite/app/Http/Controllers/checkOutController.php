@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Order;
 use App\Models\OrderDetails;
 use App\Models\Payment;
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class checkOutController
@@ -32,6 +33,17 @@ class checkOutController
                 'product_id' => $productData['id'],
                 'quantity' => $productData['quantity'],
             ]);
+        }
+        foreach ($data['product'] as $orderItem){
+            $productID =$orderItem['id'];
+            $quantity = $orderItem['quantity'];
+
+            $product = Product::find($productID);
+            if($product){
+                $newStock = $product->stock - $quantity;
+                $product->stock = $newStock;
+                $product->save();
+            }
         }
          Payment::create([
             'order_id'=>$order->id,

@@ -25,10 +25,20 @@ class OrderController extends Controller
     public function deleteOrder($order_id)
     {
         $order = Order::find($order_id);
+        $order_details =OrderDetails::with('product')->where('order_id',$order_id)->get();
         if($order)
         {
+
             $order->status ='Cancelled';
             $order->save();
+
+            foreach ($order_details as $order_detail){
+                $product = $order_detail ->product;
+                $product->stock += $order_detail->quantity;
+                $product->save();
+                $order_detail->delete();
+            }
+
             return response(['message'=>'Order Cancelled']);
 
         }else{
