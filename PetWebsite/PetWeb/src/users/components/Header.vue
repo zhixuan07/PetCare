@@ -6,7 +6,7 @@
   
     <nav class="navigation">
       <!-- Navigation links -->
-      <router-link to="/home">HOME</router-link>
+      <router-link to="/">HOME</router-link>
       <router-link to="/all">ALL</router-link>
       <router-link to="/food">FOOD</router-link>
       <router-link to="/grooming">GROOMING</router-link>
@@ -17,6 +17,7 @@
 
       <router-link to="/test">test page from gpt</router-link>
       <router-link to="/test2">test page 2</router-link>
+      <a @click="store.logout">LogOut</a>
     </nav>
     <div class="actions">
       
@@ -32,20 +33,10 @@
 
 
 
-<script>
+<script setup>
+import { useUserStore } from '../stores/user';
+const store = useUserStore();
 
-export default {
-  components: {
-  },
-  data() {
-    return {
-      
-    };
-  },
-  methods: {
-    
-  },
-};
 </script>
 
 

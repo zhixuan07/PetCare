@@ -1,13 +1,21 @@
 import { createRouter, createWebHistory } from "vue-router";
 
+
+
 const router = createRouter({
     history: createWebHistory(),
     routes: [
         
         {
-            path: "/home",
+            path: "/",
             name: "Home",
+            meta: { isGuest: true },
             component: () => import("../users/views/Homepage.vue"),
+            children: [ 
+               
+            ],
+
+
         },
         {
             path: "/login",
@@ -19,6 +27,7 @@ const router = createRouter({
             name: "Register",
             component: () => import("../users/views/Register.vue"),
         },
+        
         {
             path: "/cart",
             name: "Cart",
@@ -35,7 +44,7 @@ const router = createRouter({
             component: () => import("../users/views/All.vue"),
         },
         {
-            path: "/product",
+            path: "/product/:id",
             name: "Product",
             component: () => import("../users/views/Product.vue"),
         },
@@ -119,9 +128,8 @@ const router = createRouter({
     ],
 });
 router.beforeEach((to, from, next) => {
-    
-        next();
-    
+next()
+   
 });
 
 export default router;

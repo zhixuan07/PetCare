@@ -21,7 +21,7 @@ function Order() {
 
     const deleteOrder = async (order_id) => {
         try {
-            await axiosClient.delete(`/admin/deleteOrder/${order_id}`);
+            await axiosClient.patch(`/admin/deleteOrder/${order_id}`);
             alert("Order deleted");
             location.reload();
         } catch (error) {
