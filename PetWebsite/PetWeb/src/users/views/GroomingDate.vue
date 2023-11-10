@@ -56,6 +56,7 @@ export default {
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin: 30px 30px 350px 30px;
 }
 
 .date-buttons {
@@ -74,4 +75,13 @@ export default {
     cursor: pointer;
     border-radius: 5px;
 }
+
+
+  /* Media query for mobile */
+  @media screen and (max-width: 768px) {
+    .date-selection-page {
+        
+        margin: 30px;
+    }
+  }
 </style>
