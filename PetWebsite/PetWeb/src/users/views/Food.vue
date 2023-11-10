@@ -6,50 +6,40 @@
         <div class="food-page">
             <h1 class="title">FOOD</h1>
 
-            <!-- Toggle Button for Filters -->
-            <button @click="toggleFilters" class="toggle-filters-button">
-                Toggle Filters
-            </button>
-
-            <!-- Filters Container -->
-            <div class="filters-container">
-                <!--filters-->
-                <div class="filters d-flex align-items-center">
-                    <div class="filter">
-                        <label for="availability">Availability :</label>
-                        <select id="availability" class="custom-select">
-                            <option value="in-stock">In Stock</option>
-                            <option value="out-of-stock">Out of Stock</option>
-                        </select>
-                    </div>
-                    <div class="filter">
-                        <label for="price-range">Price Range (MYR) :</label>
-                        <input type="number" id="from-price" placeholder="From" class="price-input">
-                        <span> to </span>
-                        <input type="number" id="to-price" placeholder="To" class="price-input">
-                    </div>
-                    <div class="filter">
-                        <label for="sort-by">Sort By : </label>
-                        <select id="sort-by" class="custom-select">
-                            <option value="featured">Featured</option>
-                            <option value="best-selling">Best Selling</option>
-                            <option value="a-z">A-Z</option>
-                            <option value="z-a">Z-A</option>
-                            <option value="price-low-to-high">Price, Low to High</option>
-                            <option value="price-high-to-low">Price, High to Low</option>
-                            <option value="date-old-to-new">Date, Old to New</option>
-                            <option value="date-new-to-old">Date, New to Old</option>
-                        </select>
-                    </div>
-                    <div class="ml-auto">
-                        <button @click="searchProducts" class="btn btn-primary custom-search-button">
-                            Search
-                        </button>
-                    </div>
+            <!--filters-->
+            <div class="filters d-flex align-items-center">
+                <div class="filter">
+                    <label for="availability">Availability :</label>
+                    <select id="availability" class="custom-select">
+                        <option value="in-stock">In Stock</option>
+                        <option value="out-of-stock">Out of Stock</option>
+                    </select>
+                </div>
+                <div class="filter">
+                    <label for="price-range">Price Range (MYR) :</label>
+                    <input type="number" id="from-price" placeholder="From" class="price-input">
+                    <span> to </span>
+                    <input type="number" id="to-price" placeholder="To" class="price-input">
+                </div>
+                <div class="filter">
+                    <label for="sort-by">Sort By : </label>
+                    <select id="sort-by" class="custom-select">
+                        <option value="featured">Featured</option>
+                        <option value="best-selling">Best Selling</option>
+                        <option value="a-z">A-Z</option>
+                        <option value="z-a">Z-A</option>
+                        <option value="price-low-to-high">Price, Low to High</option>
+                        <option value="price-high-to-low">Price, High to Low</option>
+                        <option value="date-old-to-new">Date, Old to New</option>
+                        <option value="date-new-to-old">Date, New to Old</option>
+                    </select>
+                </div>
+                <div class="ml-auto">
+                    <button @click="searchProducts" class="btn btn-primary custom-search-button">
+                        Search
+                    </button>
                 </div>
             </div>
-
-            
 
 
             <!--cards-->
@@ -107,15 +97,7 @@
             Header,
             Footer
         },
-        data() {
-            return {
-                showFilters: true, // Initially show filters in desktop view
-            };
-        },
         methods: {
-            toggleFilters() {
-                this.showFilters = !this.showFilters;
-            },
             searchProducts() {
             // Implement the logic to process the selected filter options
             // You can access the filter values using the element IDs and then fetch the relevant products.
@@ -129,39 +111,7 @@
 </script>
 
 <style scoped>
-
-/* Add media query for mobile view */
-@media (max-width: 768px) {
-    .filters-container {
-        display: block; /* Change to block for vertical arrangement */
-    }
-    .filters {
-        display: flex;
-        flex-wrap: wrap;
-    }
-    .toggle-filters-button {
-        display: block;
-    }
-}
-
-.toggle-filters-button {
-    display: none; /* Initially hide the toggle button */
-    background-color: #26243a;
-    color: white;
-    border: none;
-    padding: 5px;
-    border-radius: 5px;
-    width: 100px;
-    margin: 0 5px;
-    cursor: pointer;
-    font-weight: bold;
-}
-.food-page {
-  background-color: white;
-  color: black;
-  text-align: center;
-  padding: 20px;
-}
+ 
 
 .title {
   font-size: 40px;

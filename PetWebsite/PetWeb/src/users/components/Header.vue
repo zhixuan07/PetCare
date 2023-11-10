@@ -32,15 +32,42 @@
   
         <router-link to="/grooming">GROOMING</router-link>
         <router-link to="/services">PET SERVICES</router-link>
-        <router-link to="/test2">6est2</router-link>
+        
+        
+        <router-link to="/orderdetails">order details test</router-link>
       </nav>
   
       
   
-      <div class="actions">
-        <router-link to="/cart">
+      
+
+      <div class="actions" style="display: flex; align-items: center;" >
+        <!-- If user is logged in, show Cart , profile button and Logout button -->
+
+        <router-link to="/cart" v-if="isUserLoggedIn" style="margin-right:10px;">
           <i class="fas fa-shopping-cart" style="font-size: 25px;"></i>
         </router-link>
+        
+        <button class="btn"  v-if="isUserLoggedIn" style="margin-right:10px; align-items: center;">
+          <router-link to="/userprofile">
+            <i class="fas fa-user-circle" style="font-size: 25px;"></i>
+            <span style="margin-left: 5px; ">{{ username }}</span>
+          </router-link>
+        </button>
+        
+        <button class="btn btn-primary" v-if="isUserLoggedIn" @click="logout">Logout</button>
+
+        <!-- If user is not logged in, show Login and Register buttons -->
+        <div class="container text-center" style="padding: 0px; display: flex;">
+          <router-link to="/login" v-if="!isUserLoggedIn">
+          
+            <button class="btn btn-primary" style="margin-left: 10px;">Login</button>
+          </router-link>
+          <router-link to="/register" v-if="!isUserLoggedIn">
+            
+            <button class="btn btn-primary" style="margin-left: 10px;">Register</button>
+          </router-link>
+        </div>
       </div>
     </div>
 
@@ -67,20 +94,45 @@
         <router-link to="/toys/dog">DOG TOYS</router-link>
         <router-link to="/grooming">GROOMING</router-link>
         <router-link to="/services">PET SERVICES</router-link>
+        <!-- If user is not logged in, show Login and Register buttons -->
+        <div class="container text-center" style="padding: 0px;">
+          <router-link to="/login" v-if="!isUserLoggedIn">
+          
+            <button class="btn btn-primary" style="width: 330px">Login</button>
+          </router-link>
+          <router-link to="/register" v-if="!isUserLoggedIn">
+            
+            <button class="btn btn-primary" style="width: 330px">Register</button>
+          </router-link>
+        </div>
+
+        <div class="container text-center" style="padding: 0px;">
+          <!-- If user is logged in, show log out button at expanded menu-->
+          
+          <button  class="btn btn-primary" style="width: 330px" v-if="isUserLoggedIn" @click="logout">Logout</button>
+  
+          
+        </div>
+        
       </div>
 
 
-      <div class="logo">
+      <div class="logo" >
         <img src="../assets/logo.png" alt="PetCare Logo">
       </div>
 
 
 
-      <!--cart-->
+
       <div class="actions">
-        <router-link to="/cart">
-          <i class="fas fa-shopping-cart" style="font-size: 25px;"></i>
+        <!-- If user is logged in, show Cart at navigation bar-->
+        <router-link to="/cart" v-if="isUserLoggedIn">
+          <i class="fas fa-shopping-cart" style="font-size: 25px; margin-right: 10px;"></i>
         </router-link>
+        <router-link to="/userprofile" v-if="isUserLoggedIn"  >
+          <i class="fas fa-user-circle" style="font-size: 25px;"></i>
+        </router-link>
+        
       </div>
     </div>
     
@@ -94,6 +146,8 @@ export default {
       foodDropdownOpen: false,
       toysDropdownOpen: false,
       mobileMenuOpen: false,
+      isUserLoggedIn: true, // For testing purposes, set it to true to display the logged-in version
+      username: "JohnDoe", // Replace with the actual username from your authentication system
     };
   },
   methods: {
@@ -136,6 +190,7 @@ export default {
   background-color: #fff;
   color: #333;
   border-bottom: 1px solid grey;
+  margin-bottom: 70px;
 }
 
 .mobile-view {
@@ -198,6 +253,13 @@ export default {
   background-color: #ddd;
 }
 
+/*user account button*/
+.user-account-button {
+  border: 1px solid #000;
+  border-radius: 10px;
+  background-color: rgb(139, 139, 139);
+}
+
 /* Media query for mobile */
 @media screen and (max-width: 768px) {
 
@@ -218,6 +280,7 @@ export default {
 
   .logo {
     text-align: center;
+    top:80.0
   }
 
   .mobile-menu-button {
@@ -265,6 +328,9 @@ export default {
   .actions {
     margin-right: 10px;
   }
+
+
+  
 
 }
 </style>
