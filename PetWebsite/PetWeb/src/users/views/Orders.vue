@@ -94,16 +94,6 @@
     justify-content: center;
   }
 
-  .tab-container::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    right: 15px; 
-    bottom: 0;
-    width: 1px;
-    background-color: #ccc; /* Vertical line color */
-  }
-  
   .tab {
     width: 100px;
     cursor: pointer;
