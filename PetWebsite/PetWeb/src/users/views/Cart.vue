@@ -37,25 +37,7 @@
           </tr>
 
           <!-- Example cart items - Replace with your actual data -->
-          <tr>
-            <td class="product-cell">
-              <div class="product-info">
-                <img src="../assets/square.png" alt="Product Image" class="product-image" />
-                
-              </div>
-              <div class="product-details">
-                  <p class="product-name">Product 1</p>
-                  <p class="unit-price">RM 10.99</p>
-              </div>
-            </td>
-            
-            <td class="quantity-cell">
-              <input type="number" value="1" min="1"  />
-              <button @click="removeItem(0)" class="remove-item">Remove</button>
-            </td>
-            
-            <td class="total-cell">RM 10.99</td>
-          </tr>
+          
           
         </tbody>
       </table>
