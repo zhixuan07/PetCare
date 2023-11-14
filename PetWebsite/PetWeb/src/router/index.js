@@ -7,7 +7,7 @@ const router = createRouter({
     routes: [
         
         {
-            path: "/home",
+            path: "/",
             name: "Home",
             meta: { isGuest: true },
             component: () => import("../users/views/Homepage.vue"),
@@ -31,12 +31,24 @@ const router = createRouter({
         {
             path: "/cart",
             name: "Cart",
-            component: () => import("../users/views/Cart.vue"),
+            component: () => import("../users/views/Cart.vue")
         },
         {
             path: "/food",
             name: "Food",
             component: () => import("../users/views/Food.vue"),
+            
+
+        },
+        {
+            path:"/food/cat",
+            name:"CatFood",
+            component:()=>import("../users/views/CatFood.vue")
+        },
+        {
+            path:"/food/dog",
+            name:"DogFood",
+            component:()=>import("../users/views/DogFood.vue")
         },
         {
             path: "/all",
