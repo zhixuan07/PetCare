@@ -7,7 +7,7 @@ const router = createRouter({
     routes: [
         
         {
-            path: "/",
+            path: "/home",
             name: "Home",
             meta: { isGuest: true },
             component: () => import("../users/views/Homepage.vue"),
@@ -69,6 +69,26 @@ const router = createRouter({
             component: () => import("../users/views/GroomingTime.vue"),
         },
         {
+            path: "/userprofile",
+            name: "UserProfile",
+            component: () => import("../users/views/UserProfile.vue"),
+        },
+        {
+            path: "/editprofile",
+            name: "EditProfile",
+            component: () => import("../users/views/EditProfile.vue"),
+        },
+        {
+            path: "/orders",
+            name: "Orders",
+            component: () => import("../users/views/Orders.vue"),
+        },
+        {
+            path: "/orderdetails",
+            name: "OrderDetails",
+            component: () => import("../users/views/OrderDetails.vue"),
+        },
+        {
             path: "/test",
             name: "Test",
             component: () => import("../users/views/Test.vue"),
@@ -78,8 +98,6 @@ const router = createRouter({
             name: "Test2",
             component: () => import("../users/views/Test2.vue"),
         },
-
-
         {
             path: "/auth",
             redirect: "/adminLogin",

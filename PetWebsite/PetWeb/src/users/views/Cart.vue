@@ -36,6 +36,26 @@
             <td class="total-cell">RM {{ store.calculateItemTotal(item)  }}</td>
           </tr>
 
+          <!-- Example cart items - Replace with your actual data -->
+          <tr>
+            <td class="product-cell">
+              <div class="product-info">
+                <img src="../assets/square.png" alt="Product Image" class="product-image" />
+                
+              </div>
+              <div class="product-details">
+                  <p class="product-name">Product 1</p>
+                  <p class="unit-price">RM 10.99</p>
+              </div>
+            </td>
+            
+            <td class="quantity-cell">
+              <input type="number" value="1" min="1"  />
+              <button @click="removeItem(0)" class="remove-item">Remove</button>
+            </td>
+            
+            <td class="total-cell">RM 10.99</td>
+          </tr>
           
         </tbody>
       </table>
@@ -127,6 +147,8 @@ onMounted(() => {
   height: 200px; /* Adjust the size as needed */
 }
 
+
+
 .product-details {
   margin-left: 10px;
   text-align: left;
@@ -184,4 +206,44 @@ input[type="number"] {
 .checkout-button:hover {
   background-color: #4d4d4d;
 }
+
+/* Media query for mobile */
+@media screen and (max-width: 768px) {
+
+  .product-cell {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .product-image {
+    width: 75px;
+    height: 75px;
+  }
+
+  .product-details {
+    margin-top: 10px; /* Add some spacing between product-info and product-details */
+    margin-left: 0;
+  }
+
+
+  .cart-page {
+    background-color: white;
+    color: black;
+    text-align: center;
+    margin: 0px;
+  }
+
+  input[type="number"] {
+    width: 60px;
+    height: 30px;
+    text-align: center;
+    margin-right: 10px;
+    border: 2px solid #ebebeb;
+    border-radius: 5px;
+  }
+
+  
+}
+
+
 </style>

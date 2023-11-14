@@ -1,22 +1,28 @@
 <template>
   <div>
     <div class="slideshow-container">
+
       <div class="mySlides fade">
-        <div class="numbertext">1 / 3</div>
-        <img src="../assets/promotional_test2.jpg" style="width: 100%" />
-        <div class="text">Caption Text</div>
+        <div class="numbertext">1 / 4</div>
+        <img src="../assets/christmaspromo.png" style="width: 100%" />
+        <div class="text"></div>
+      </div>
+      <div class="mySlides fade">
+        <div class="numbertext">2 / 4</div>
+        <img src="../assets/newproduct.png" style="width: 100%" />
+        <div class="text"></div>
       </div>
 
       <div class="mySlides fade">
-        <div class="numbertext">2 / 3</div>
-        <img src="../assets/promotional_test2.jpg" style="width: 100%" />
-        <div class="text">Caption Two</div>
+        <div class="numbertext">3 / 4</div>
+        <img src="../assets/featuredproduct.png" style="width: 100%" />
+        
       </div>
 
       <div class="mySlides fade">
-        <div class="numbertext">3 / 3</div>
-        <img src="../assets/promotional_test2.jpg" style="width: 100%" />
-        <div class="text">Caption Three</div>
+        <div class="numbertext">4 / 4</div>
+        <img src="../assets/featuredproduct2.png" style="width: 100%" />
+        
       </div>
 
       <a class="prev" @click="plusSlides(-1)">❮</a>
@@ -28,6 +34,7 @@
       <span class="dot" @click="currentSlide(1)"></span>
       <span class="dot" @click="currentSlide(2)"></span>
       <span class="dot" @click="currentSlide(3)"></span>
+      <span class="dot" @click="currentSlide(4)"></span>
     </div>
   </div>
 </template>
@@ -103,7 +110,7 @@ img {
   width: auto;
   padding: 16px;
   margin-top: -22px;
-  color: white;
+  color: rgb(0, 0, 0);
   font-weight: bold;
   font-size: 18px;
   transition: 0.6s ease;
@@ -120,7 +127,7 @@ img {
 /* On hover, add a black background color with a little bit see-through */
 .prev:hover,
 .next:hover {
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color: rgba(0, 138, 115, 0.8);
 }
 
 /* Caption text */
@@ -136,7 +143,7 @@ img {
 
 /* Number text (1/3 etc) */
 .numbertext {
-  color: #f2f2f2;
+  color: #000000;
   font-size: 12px;
   padding: 8px 12px;
   position: absolute;

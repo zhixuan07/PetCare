@@ -156,9 +156,10 @@ onMounted(() => {
     width: 45%;
     padding: 40px;
     border: 1px solid #ccc;
-}
-
-.checkout-title {
+    border-radius: 5px;
+  }
+  
+  .checkout-title {
     font-size: 24px;
     margin-bottom: 20px;
 }
@@ -176,9 +177,9 @@ textarea {
     margin-bottom: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
-}
+  }
 
-.custom-date-input {
+  .custom-date-input {
     appearance: textfield; /* Makes it look like a text input */
     -moz-appearance: textfield; /* Firefox support */
     -webkit-appearance: textfield; /* WebKit support */
@@ -187,9 +188,9 @@ textarea {
     border: 1px solid #ccc;
     border-radius: 5px;
     font-size: 16px;
-}
-
-button.checkout-button {
+  }
+  
+  button.checkout-button {
     background-color: #494949;
     color: white;
     padding: 10px 20px;
@@ -197,39 +198,63 @@ button.checkout-button {
     border-radius: 5px;
     cursor: pointer;
     font-size: 18px;
-    width: 280px;
-}
-
-button.checkout-button:hover {
+  }
+  
+  button.checkout-button:hover {
     background-color: #707070;
-}
-/* Cart summary styles */
-.cart-summary {
+    
+  }
+  /* Cart summary styles */
+  .cart-summary {
     width: 45%;
     padding: 40px;
     border: 1px solid #ccc;
-}
-
-.summary-title {
+    border-radius: 5px;
+  }
+  
+  .summary-title {
     font-size: 24px;
     margin-bottom: 20px;
-}
-
-summary-table {
+  }
+  
+  summary-table {
     width: 100%;
     border-collapse: collapse;
     margin-bottom: 20px;
-}
-
-summary-table th,
-summary-table td {
+  }
+  
+  summary-table th,
+  summary-table td {
     padding: 10px;
     border: 1px solid #ccc;
     text-align: center;
-}
-
-.total-amount {
+  }
+  
+  .total-amount {
     font-size: 18px;
     font-weight: bold;
-}
-</style>
+  }
+  
+  /* Media query for mobile */
+  @media screen and (max-width: 768px) {
+    .checkout-page {
+      flex-direction: column;
+      margin: 30px 30px 200px 30px;
+    }
+
+    .cart-summary,
+    .checkout-container {
+      width: 100%;
+      padding: 20px;
+      margin-bottom: 30px;
+    }
+
+
+    
+
+    
+  }
+
+  
+  </style>
+  

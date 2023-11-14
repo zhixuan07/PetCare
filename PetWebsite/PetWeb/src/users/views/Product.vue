@@ -132,81 +132,75 @@ const buynow= (product,quantity) => {
 
 
 <style scoped>
-.bounce-enter-active {
-  animation: bounce-in 10.0s;
-}
-.bounce-leave-active {
-  animation: bounce-in 0.5s reverse;
-}
-@keyframes bounce-in {
-  0% {
-    transform: scale(0);
-  }
-  50% {
-    transform: scale(1.25);
-  }
-  100% {
-    transform: scale(1);
-  }
-}
-
 .product-page {
-    background-color: white;
-    color: black;
-    text-align: center;
-    padding: 20px;
-    margin-left: 200px;
-    margin-right: 200px;
+  background-color: white;
+  color: black;
+  text-align: center;
+  padding: 20px;
+  margin-left: 200px;
+  margin-right: 200px;
 }
 
 .image-gallery {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .image-item {
-    width: 50%;
-    padding: 10px; /* Add padding for spacing between images if needed */
+  width: 100%;
+  padding: 10px; /* Add padding for spacing between images if needed */
 }
 
 .image-item img {
-    width: 100%; /* Ensure the image width is 100% of the image item's width */
-    height: auto; /* Maintain the image's aspect ratio */
-    object-fit: cover; /* Cover the entire container while maintaining the aspect ratio */
-    max-height: 100%; /* Prevent the image from exceeding the height of the container */
+  width: 100%; /* Ensure the image width is 100% of the image item's width */
+  height: auto; /* Maintain the image's aspect ratio */
+  object-fit: cover; /* Cover the entire container while maintaining the aspect ratio */
+  max-height: 100%; /* Prevent the image from exceeding the height of the container */
 }
 
 .product-title {
-    font-size: 40px;
-    font-weight: bold;
+  font-size: 40px;
+  font-weight: bold;
 }
 
 .unit-price {
-    font-size: 20px;
-    font-weight: bold;
+  font-size: 20px;
+  font-weight: bold;
 }
 
-.quantity-control {
-    border: none;
-    padding: 5px 10px;
-    margin: 5px 5px;
+
+.quantity-control{
+  border: none;
+  padding: 5px 10px;
+  margin: 5px 5px;
 }
 .quantity-control button {
-    background-color: #303030;
-    color: azure;
-    border: none;
-    margin: 0 10px;
-    border-radius: 20%;
-    width: 40px;
-    height: 40px;
+  background-color: #303030;
+  color: azure;
+  border: none;
+  margin: 0 10px;
+  border-radius: 20%;
+  width: 40px; 
+  height: 40px; 
+
 }
 
 .custom-button {
-    width: 230px;
+  width: 230px; 
 }
 
 .product-description {
-    margin-top: 20px;
+  margin-top: 20px;
+}
+
+
+@media screen and (max-width: 768px) {
+  .product-page {
+    margin: 15px 15px 200px 15px;
+  }
+
 }
 </style>
+
+

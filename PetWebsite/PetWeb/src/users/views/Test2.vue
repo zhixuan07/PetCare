@@ -1,36 +1,74 @@
 <template>
-    <div>
-      <div class="slideshow-container">
-        <div class="mySlides fade">
-          <div class="numbertext">1 / 3</div>
-          <img src="../assets/promotional_test2.jpg" style="width: 100%" />
-          <div class="text">Caption Text</div>
-        </div>
-  
-        <div class="mySlides fade">
-          <div class="numbertext">2 / 3</div>
-          <img src="../assets/promotional_test1.jpg" style="width: 100%" />
-          <div class="text">Caption Two</div>
-        </div>
-  
-        <div class="mySlides fade">
-          <div class="numbertext">3 / 3</div>
-          <img src="../assets/promotional_test2.jpg" style="width: 100%" />
-          <div class="text">Caption Three</div>
-        </div>
-  
-        <a class="prev" @click="plusSlides(-1)">❮</a>
-        <a class="next" @click="plusSlides(1)">❯</a>
-      </div>
-      <br />
-  
-      <div style="text-align:center">
-        <span class="dot" @click="currentSlide(1)"></span>
-        <span class="dot" @click="currentSlide(2)"></span>
-        <span class="dot" @click="currentSlide(3)"></span>
-      </div>
+  <div class="sticky-top">
+    <div class="search-box bg-light py-2 px-4">
+        <button class="search-box-element btn btn-primary d-md-none" type="button" data-bs-toggle="collapse" data-bs-target="#searchCollapse" aria-expanded="false" aria-controls="searchCollapse">
+            <i class="bi bi-search">Toggle Search</i>
+        </button>
+        <div class="collapse show d-md-block" id="searchCollapse">
+            <form id="find-pet-form">
+                <!--search inputs-->
+                <div class="row">
+                    <div class="search-box-element col-md-2 form-group keyword-element-top-margin">
+                        <!--<label for="animal-keyword" class="form-label">Animal Keyword</label>-->
+                        <input type="text" class="form-control field-height" id="animal-keyword" name="animal-keyword" placeholder="Keyword">
+                    </div>
+                    <div class="search-box-element col-md-2 form-group">
+                        <!--<label for="animal-type" class="form-label">Animal Type</label>-->
+                        <select id="animal-type" name="animal-type" class="form-select field-height">
+                            <option value="">Select Type</option>
+                            <option value="1">Cat</option>
+                            <option value="2">Dog</option>
+                        </select>
+                    </div>
+                    <div class="search-box-element col-md-2 form-group">
+                        
+                        <select id="gender" name="gender" class="form-select field-height">
+                            <option value="">Select Gender</option>
+                            <option value="1">Female</option>
+                            <option value="2">Male</option>
+                        </select>
+                    </div>
+                    <div class="search-box-element col-md-2 form-group">
+                        
+                        <select id="size" name="size" class="form-select field-height">
+                            <option value="">Select Size</option>
+                            <option value="1">Small</option>
+                            <option value="2">Medium</option>
+                            <option value="3">Large</option>
+                        </select>
+                    </div>
+
+                    <div class="search-box-element col-md-2 form-group">
+                        
+                        <select class="form-select field-height" id="state" name="state">
+                            <option value="">Select State</option>
+                            <option value="Johor">Johor</option>
+                            <option value="Kedah">Kedah</option>
+                            <option value="Kelantan">Kelantan</option>
+                            <option value="Melaka">Melaka</option>
+                            <option value="Negeri Sembilan">Negeri Sembilan</option>
+                            <option value="Pahang">Pahang</option>
+                            <option value="Perak">Perak</option>
+                            <option value="Perlis">Perlis</option>
+                            <option value="Pulau Pinang">Pulau Pinang</option>
+                            <option value="Sabah">Sabah</option>
+                            <option value="Sarawak">Sarawak</option>
+                            <option value="Selangor">Selangor</option>
+                            <option value="Terengganu">Terengganu</option>
+                            <option value="Wilayah Persekutuan Kuala Lumpur">Wilayah Persekutuan Kuala Lumpur</option>
+                            <option value="Wilayah Persekutuan Labuan">Wilayah Persekutuan Labuan</option>
+                            <option value="Wilayah Persekutuan Putrajaya">Wilayah Persekutuan Putrajaya</option>
+                        </select>
+                    </div>
+                    <div class="col-md-2 form-group d-flex align-items-center justify-content-center">
+                        <button type="submit" class="btn btn-primary field-height">Search</button>
+                    </div>
+                </div>               
+            </form>
+        </div> 
     </div>
-  </template>
+  </div>
+</template>
   
   <script>
   export default {
@@ -43,145 +81,33 @@
       this.showSlides(this.slideIndex);
     },
     methods: {
-      plusSlides(n) {
-        this.showSlides((this.slideIndex += n));
-      },
-      currentSlide(n) {
-        this.showSlides((this.slideIndex = n));
-      },
-      showSlides(n) {
-        let i;
-        let slides = this.$el.querySelectorAll(".mySlides");
-        let dots = this.$el.querySelectorAll(".dot");
-        if (n > slides.length) {
-          this.slideIndex = 1;
-        }
-        if (n < 1) {
-          this.slideIndex = slides.length;
-        }
-        for (i = 0; i < slides.length; i++) {
-          slides[i].style.display = "none";
-        }
-        for (i = 0; i < dots.length; i++) {
-          dots[i].classList.remove("active");
-        }
-        slides[this.slideIndex - 1].style.display = "block";
-        dots[this.slideIndex - 1].classList.add("active");
-      },
+     
     },
   };
   </script>
   
   <style scoped>
-  * {
-    box-sizing: border-box;
+  /* Form  */
+  .form-control,
+  .form-select {
+    font-size: 16px;
   }
-  body {
-    font-family: Verdana, sans-serif;
-    margin: 0;
-  }
-  .mySlides {
-    display: none;
-  }
-  img {
-    vertical-align: middle;
+
+
+  .field-height{
+    height: 40px;
   }
   
-  /* Slideshow container */
-  .slideshow-container {
-    max-width: 1000px;
-    position: relative;
-    margin: auto;
-  }
-  
-  /* Next & previous buttons */
-  .prev,
-  .next {
-    cursor: pointer;
-    position: absolute;
-    top: 50%;
-    width: auto;
-    padding: 16px;
-    margin-top: -22px;
-    color: white;
-    font-weight: bold;
-    font-size: 18px;
-    transition: 0.6s ease;
-    border-radius: 0 3px 3px 0;
-    user-select: none;
-  }
-  
-  /* Position the "next button" to the right */
-  .next {
-    right: 0;
-    border-radius: 3px 0 0 3px;
-  }
-  
-  /* On hover, add a black background color with a little bit see-through */
-  .prev:hover,
-  .next:hover {
-    background-color: rgba(0, 0, 0, 0.8);
-  }
-  
-  /* Caption text */
-  .text {
-    color: #f2f2f2;
-    font-size: 15px;
-    padding: 8px 12px;
-    position: absolute;
-    bottom: 8px;
-    width: 100%;
-    text-align: center;
-  }
-  
-  /* Number text (1/3 etc) */
-  .numbertext {
-    color: #f2f2f2;
-    font-size: 12px;
-    padding: 8px 12px;
-    position: absolute;
-    top: 0;
-  }
-  
-  /* The dots/bullets/indicators */
-  .dot {
-    cursor: pointer;
-    height: 15px;
-    width: 15px;
-    margin: 0 2px;
-    background-color: #bbb;
-    border-radius: 50%;
-    display: inline-block;
-    transition: background-color 0.6s ease;
-  }
-  
-  .active,
-  .dot:hover {
-    background-color: #717171;
-  }
-  
-  /* Fading animation */
-  .fade {
-    animation-name: fade;
-    animation-duration: 1.5s;
-    animation-fill-mode: forwards;
-  }
-  
-  @keyframes fade {
-    from {
-      opacity: 0.4;
+
+
+  @media (max-width: 768px) {
+    .search-box-element{
+      margin-bottom: 8px;
+      color: blue;
     }
-    to {
-      opacity: 1;
-    }
-  }
-  
-  /* On smaller screens, decrease text size */
-  @media only screen and (max-width: 300px) {
-    .prev,
-    .next,
-    .text {
-      font-size: 11px;
+
+    .search-box-element.btn-primary.d-md-none[data-bs-toggle="collapse"] {
+      margin-top: 10px; /* Adjust the value as needed */
     }
   }
   </style>

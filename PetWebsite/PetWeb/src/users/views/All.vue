@@ -2,7 +2,6 @@
     <div class="all">
         <!-- Header Component -->
         <Header />
-
         <div class="food-page">
             <h1 class="title">ALL</h1>
 
@@ -176,21 +175,21 @@ const navigateToProductPage= ()=> {
 
 <style scoped>
 .food-page {
-    background-color: white;
-    color: black;
-    text-align: center;
-    padding: 20px;
+  background-color: white;
+  color: black;
+  text-align: center;
+  padding: 20px;
 }
 
 .title {
-    font-size: 40px;
-    font-weight: bold;
-    margin-top: 20px;
-    margin-bottom: 35px;
+  font-size: 40px;
+  font-weight: bold;
+  margin-top: 20px;
+  margin-bottom: 35px;
 }
 
 input[type="text"],
-textarea {
+  textarea {
     width: 800px;
     height: 45px;
     padding: 10px;
@@ -199,11 +198,11 @@ textarea {
 }
 
 .custom-search-button {
-    background-color: #26243a;
-    color: white;
+    background-color: #26243a; 
+    color: white; 
     border: none;
-    padding: 5px;
-    border-radius: 5px;
+    padding: 5px; 
+    border-radius: 5px; 
     width: 100px;
     height: 45px;
     margin: 0 5px;
@@ -212,41 +211,45 @@ textarea {
 }
 
 .custom-search-button:hover {
-    background-color: #3e3d49;
+    background-color: #3e3d49; 
+
 }
 
 .filters {
-    margin: 20px 0;
+  margin: 20px 0;
 }
 
 .filter {
-    display: inline-block;
-    margin-right: 20px;
+  display: inline-block;
+  margin-right: 20px;
 }
 
 .price-input {
     border: 1px solid #ccc;
     padding: 5px;
-    width: 170px;
+    width: 170px; 
     margin: 0 5px;
     border-radius: 5px;
 }
 .custom-select {
     border: 1px solid #ccc;
     padding: 5px;
-    width: 170px;
+    width: 170px; 
     margin: 0 5px;
     border-radius: 5px;
 }
 
-.card {
-    display: inline-block;
 
-    margin: 10px;
-    padding: 10px;
-    border: 1px solid #ccc;
-    text-align: center;
-    cursor: pointer;
+
+
+.card {
+  display: inline-block;
+  width: 100%;
+  margin: 10px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  text-align: center;
+  cursor: pointer;
 }
 
 .card-img {
@@ -255,10 +258,10 @@ textarea {
 }
 
 .product-name {
-    font-weight: bold;
+  font-weight: bold;
 }
 
 .unit-price {
-    margin-top: 10px;
+  margin-top: 10px;
 }
 </style>

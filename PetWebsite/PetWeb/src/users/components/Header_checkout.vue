@@ -1,7 +1,7 @@
 <template>
   <header class="header">
     <div class="logo">
-      <img src="../assets/icon1.svg" alt="PetCare Logo">
+      <img src="../assets/logo.png" alt="PetCare Logo">
     </div>
     
     
@@ -54,4 +54,22 @@ export default {
   max-width: 150px;
 }
 
+
+/* Media query for mobile */
+@media screen and (max-width: 768px) {
+
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-color: #fff;
+    color: #333;
+    border-bottom: 1px solid grey;
+  }
+
+  .actions {
+    margin-right: 20px;
+  }
+}
 </style>

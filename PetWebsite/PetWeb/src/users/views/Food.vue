@@ -43,7 +43,7 @@
 
 
             <!--cards-->
-            <div class="row product-cards">
+            <div class="row">
                 <div class="col-md-3 col-sm-6 mb-4">
                     <div class="card" @click="navigateToProductPage">
                     <img class="card-img" src="../assets/girl.jpg" alt="Product Image">
@@ -111,12 +111,7 @@
 </script>
 
 <style scoped>
-.food-page {
-  background-color: white;
-  color: black;
-  text-align: center;
-  padding: 20px;
-}
+ 
 
 .title {
   font-size: 40px;
@@ -165,7 +160,6 @@
 .card {
   display: inline-block;
   width: 100%;
-  margin: 10px;
   padding: 10px;
   border: 1px solid #ccc;
   text-align: center;
