@@ -28,10 +28,10 @@
 
                 <div class="col-lg-8 mt-4 user-info">
                     <h4>USER DETAILS</h4><br>
-                    <p><strong>Username</strong> <span>JohnDoe123</span></p>
-                    <p><strong>Name</strong> <span>John Doe</span></p>
-                    <p><strong>Email</strong> <span>john.doe@example.com</span></p>
-                    <p><strong>Contacts</strong> <span>123-456-7890</span></p>
+                   
+                    <p><strong>Name</strong> <span>{{ user.name }}</span></p>
+                    <p><strong>Email</strong> <span>{{user.email}}</span></p>
+                    <p><strong>Contacts</strong> <span>{{  }}</span></p>
                 </div>
                   
             </div>
@@ -49,7 +49,8 @@ import axiosClient from "../../admin/axiosClient";
 import { useCartStore } from "../stores/cart";
 import { RouterLink,useRoute,useRouter } from 'vue-router';
 import {ref,onMounted,computed} from "vue";
-
+const userString = localStorage.getItem('user');
+const user = JSON.parse(userString);
 const store = useCartStore();
 function loadCartItemsFromLocalStorage() {
   const items = JSON.parse(localStorage.getItem('cart')) || [];
@@ -58,57 +59,16 @@ function loadCartItemsFromLocalStorage() {
 const cartItems = computed(() => store.getCartItems);
 const route = useRoute();
 const router = useRouter();
-const quantity = ref(1);
-const product =ref({
-  id:"",
-  name: "",
-  description:"",
-  price:"",
-  image_path:"",
-  brand:"",
-  category:"",
-  stock:"",
-  ingredients:"",
 
-});
 
 onMounted(()=>{
-    axiosClient.get(`/product/${route.params.id}`).then((res) => {
-        const response= res.data.product;
-      product.value = {
-        id:response.id,
-        name:response.name,
-        description:response.description,
-        price:response.price,
-        image_path:response.image_path,
-        brand:response.brand,
-        category:response.category,
-        stock:response.stock,
-        ingredients:response.ingredients,
-      }
-      loadCartItemsFromLocalStorage();
+  
       
-    });
-})
+ 
+});
 
 
 
-const incrementQty = () => {
-    
-    quantity.value++;
-};
-const decrementQty = () => {
-    if (quantity.value > 1) {
-        quantity.value--;
-    }
-    // Implement logic to decrement quantity
-};
-
-const buynow= (product,quantity) => {
-    // Implement logic to buy now
-    store.buyNow(product,quantity);
-    router.push("/cart");
-};
 </script>
 
 

@@ -4,7 +4,7 @@
         <Header />
     
         <div class="food-page">
-            <h1 class="title">CAT FOOD</h1>
+            <h1 class="title">Grooming</h1>
 
             <!--filters-->
             <div class="filters d-flex align-items-center">

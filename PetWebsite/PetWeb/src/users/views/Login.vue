@@ -17,21 +17,19 @@ function login(ev) {
     ev.preventDefault();
     store.login(user);
     router.push("/");
+      
 }
 </script>
 <template>
     <div
-        class="z-0 bg-theme overflow-hidden relative w-screen h-screen bg-cover bg-no-repeat p-12  object-fill"
+        class="z-0 bg-theme overflow-hidden relative w-screen h-screen bg-cover bg-no-repeat p-12 object-fill"
         style="background-image: url('src/admin/assets/animal_background.jpg')"
     >
         <div class="flex flex-col justify-center items-center h-full">
             <h1 class="text-5xl text-white font-bold mb-4">PetWeb</h1>
             <h2 class="text-2xl text-white font-bold mb-8">User Login</h2>
 
-            <form
-                class="bg-white p-8 rounded-lg shadow-md "
-                @submit="login"
-            >
+            <form class="bg-white p-8 rounded-lg shadow-md" @submit="login">
                 <div class="mb-4">
                     <label class="text-gray-800 block mb-2">Email:</label>
                     <input
@@ -55,15 +53,17 @@ function login(ev) {
                     />
                 </div>
                 <div class="mb-4">
-                    <router-link to="/register" class="underline text-blue-500">Register</router-link>
+                    <router-link to="/register" class="underline text-blue-500"
+                        >Register</router-link
+                    >
                 </div>
                 <div class="flex justify-center">
                     <button
-                    type="submit"
-                    class="bg-theme text-white bg-red-400  text-lg font-semibold py-2 px-4 rounded-lg hover:bg-opacity-80"
-                >
-                    Login
-                </button>
+                        type="submit"
+                        class="bg-theme text-white bg-red-400 text-lg font-semibold py-2 px-4 rounded-lg hover:bg-opacity-80"
+                    >
+                        Login
+                    </button>
                 </div>
 
                 <p class="text-red-500 text-sm mt-2">{{ errmsg }}</p>

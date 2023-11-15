@@ -135,7 +135,7 @@
                 </div>
 
                 <!-- Mobile menu links -->
-                <router-link to="/home">HOME</router-link>
+                <router-link to="/">HOME</router-link>
                 <router-link to="/all">ALL</router-link>
                 <router-link to="/food/cat">CAT FOOD</router-link>
                 <router-link to="/food/dog">DOG FOOD</router-link>
@@ -183,7 +183,7 @@
                         style="font-size: 25px; margin-right: 10px"
                     ></i>
                 </router-link>
-                <router-link to="/userprofile" v-if="isUserLoggedIn">
+                <router-link to="/userprofile" >
                     <i class="fas fa-user-circle" style="font-size: 25px"></i>
                 </router-link>
             </div>
@@ -191,44 +191,64 @@
     </header>
 </template>
 
-<script>
+<script >
+import { ref,onMounted } from 'vue';
+import { useUserStore } from '../stores/user';
+
 export default {
-    data() {
-        return {
-            foodDropdownOpen: false,
-            toysDropdownOpen: false,
-            mobileMenuOpen: false,
-            isUserLoggedIn: true, // For testing purposes, set it to true to display the logged-in version
-            username: "JohnDoe", // Replace with the actual username from your authentication system
-        };
-    },
-    methods: {
-        showDropdown(category) {
-            if (category === "food") {
-                this.foodDropdownOpen = true;
-                this.toysDropdownOpen = false;
-            } else if (category === "toys") {
-                this.toysDropdownOpen = true;
-                this.foodDropdownOpen = false;
-            }
-        },
-        hideDropdown(category) {
-            if (category === "food") {
-                this.foodDropdownOpen = false;
-            } else if (category === "toys") {
-                this.toysDropdownOpen = false;
-            }
-        },
-        toggleMobileMenu() {
-            this.mobileMenuOpen = !this.mobileMenuOpen;
-        },
-        closeMobileMenu() {
-            this.mobileMenuOpen = false;
-        },
-    },
+  setup() {
+    const store = useUserStore(); // Use your Pinia store
+    onMounted (() => {
+        store.loadUserFromLocalStorage();
+    })
+   
+    const isUserLoggedIn = store.isAuth;
+    const foodDropdownOpen = ref(false);
+    const toysDropdownOpen = ref(false);
+    const mobileMenuOpen = ref(false);
+
+    const showDropdown = (category) => {
+      foodDropdownOpen.value = category === 'food';
+      toysDropdownOpen.value = category === 'toys';
+    };
+
+    const hideDropdown = (category) => {
+      if (category === 'food') {
+        foodDropdownOpen.value = false;
+      } else if (category === 'toys') {
+        toysDropdownOpen.value = false;
+      }
+    };
+
+    const toggleMobileMenu = () => {
+      mobileMenuOpen.value = !mobileMenuOpen.value;
+    };
+
+    const closeMobileMenu = () => {
+      mobileMenuOpen.value = false;
+    };
+
+    const logout = () => {
+      store.logout(); // Assuming you have a logout mutation in your Pinia store
+      // Redirect to the login page
+      // You may need to use the router or another mechanism for navigation
+      // this.$router.push("/login");
+    };
+
+    return {
+      foodDropdownOpen,
+      toysDropdownOpen,
+      mobileMenuOpen,
+      showDropdown,
+      hideDropdown,
+      toggleMobileMenu,
+      closeMobileMenu,
+      isUserLoggedIn,
+      logout,
+    };
+  },
 };
 </script>
-
 <style scoped>
 /* Add your header styles here */
 

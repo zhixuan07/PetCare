@@ -8,22 +8,22 @@
                 <div class="card">
                     <div class="card-body">
                         <h4 class="card-title">Edit Profile</h4>
-                        <form id="editprofile-form">
+                        <form id="editprofile-form" @submit.prevent="updateUserProfile">
                             <div class="mb-3">
-                                <label for="username" class="form-label">Username</label>
-                                <input type="text" class="form-control" id="username" name="username" placeholder="Enter username" required>
+                                <label for="username" class="form-label">Name</label>
+                                <input type="text" v-model="user.name" class="form-control" id="username" name="username" placeholder="Enter username" required>
                             </div>
                             <div class="mb-3">
-                                <label for="name" class="form-label">Name</label>
-                                <input type="text" class="form-control" id="name" name="name" placeholder="Enter name" required>
+                                <label  class="form-label">Address</label>
+                                <input type="text" v-model="user.address" class="form-control" placeholder="Enter Address" required>
                             </div>
                             <div class="mb-3">
-                                <label for="email" class="form-label">Email</label>
-                                <input type="email" class="form-control" id="email" name="email" placeholder="Enter email" required>
+                                <label class="form-label">Email</label>
+                                <input type="email" v-model="user.email" disabled class="form-control"  placeholder="Enter email" required> 
                             </div>
                             <div class="mb-3">
                                 <label for="contacts" class="form-label">Contacts</label>
-                                <input type="text" class="form-control" id="contacts" name="contacts" placeholder="Enter contacts" required>
+                                <input type="text" v-model="user.contact" class="form-control" placeholder="Enter contacts" required>
                             </div>
                             
                             
@@ -46,17 +46,34 @@
     <Footer />
 </template>
 
-<script>
+<script setup>
   import Header from '../components/Header.vue';
   import Footer from '../components/Footer.vue';
+  import { ref,onMounted } from 'vue';
+  import { useUserStore } from '../stores/user';
+  const userString =localStorage.getItem('user');
+  const user = ref(JSON.parse(userString));
+  const store = useUserStore();
+
+  const updateUserProfile = async () => {
+  try {
+    // Call the Pinia action to update the user profile
+    await store.updateUserProfile(user.value,user.id);
+
+    // Optionally, you can update the local storage with the latest user data
+    localStorage.setItem('user', JSON.stringify(user.value));
+    
+
+  } catch (error) {
+    console.error('Error updating user profile:', error.message);
+  }
+};
+  const profile ={
+    name: '',
+    email: '',
+    address: '',
+    contact: '',
+  }
   
-  export default {
-    components: {
-      Header,
-      Footer,
-    },
-    methods: {
-      
-    },
-  };
+  
 </script>

@@ -8,13 +8,12 @@
           <h2 class="checkout-title">Checkout</h2>
           <div class="user-info">
             <label for="recipientName">Recipient Name</label>
-            <input type="text" id="recipientName" v-model="recipientName" />
+            <input type="text" id="recipientName" v-model="checkout.recipientName" />
   
-            <label for="address">Address</label>
-            <textarea id="address" v-model="address"></textarea>
+            
   
             <label for="phoneNumber">Phone Number</label>
-            <input type="tel" id="phoneNumber" v-model="phoneNumber" @input="formatPhoneNumber"/>
+            <input type="tel" id="phoneNumber" v-model="checkout.phoneNumber" @input="formatPhoneNumber"/>
   
             <label for="cardNumber">Card Number</label>
             <input type="text" id="cardNumber" v-model="cardNumber" @input="formatCardNumber" />
@@ -28,6 +27,7 @@
             <!-- You can add a date picker component here if needed -->
           </div>
           <button class="checkout-button" @click="processPayment">Pay Now</button>
+          <button class="checkout-button mt-2" @click="cancelAppointment">Cancel Appointment</button>
         </div>
   
         <div class="cart-summary">
@@ -35,22 +35,27 @@
             <table class="summary-table table">
                 <thead>
                 <tr>
-                    <th>Product</th>
-                    <th>Qty</th>
-                    <th>Price</th>
+                    <th>Type Service</th>
+                    <th>Date</th>
+                    <th>Time</th>
+              
+                    <th>Type of pet</th>
+                    <th>Number of pet</th>
                 </tr>
                 </thead>
                 <tbody>
                 <!-- Loop through the cart items and display them here -->
-                <tr v-for="(item, index) in cartItems" :key="index">
-                    <td>{{ item.name }}</td>
-                    <td>{{ item.quantity }}</td>
-                    <td>{{ item.unitPrice * item.quantity }}</td>
+                <tr>
+                    <td>{{service.typeService }}</td>
+                    <td>{{service.appointmentDate }}</td>
+                    <td>{{service.appointmentTime }}</td>
+                    <td>{{service.typePet}}</td>
+                    <td>{{service.numberPet }}</td>
                 </tr>
                 </tbody>
             </table>
             <div class="total-amount">
-                <p>Total: {{ calculateSubtotal() }}</p>
+                <p>Total:{{ store.calculateTotal() }} </p>
             </div>
         </div>
 
@@ -61,51 +66,78 @@
     </div>
   </template>
   
-  <script>
-  import Header_checkout from '../components/Header_checkout.vue';
+  <script setup>
+  import Header from "../components/Header.vue";
+  import Footer from "../components/Footer.vue";
+  import axiosClient from "../../admin/axiosClient";
+  import {useRouter} from 'vue-router';
+  import { useServiceStore } from "../stores/service";
+  import { onMounted } from "vue";
+  import { toast } from 'vue3-toastify';
+  import 'vue3-toastify/dist/index.css';
   
-  export default {
-    components: {
-      Header_checkout,
-    },
-    data() {
-      return {
-        recipientName: '',
-        address: '',
-        phoneNumber: '',
-        cardNumber: '',
-        cvv: '',
-        expiryDate: '',
-        cartItems: [
-          // Initialize this array with your cart items (e.g., { name: "Product Name", unitPrice: 10.99, quantity: 1 })
-        ],
-      };
-    },
-    methods: {
-        formatPhoneNumber() {
-            this.phoneNumber = this.phoneNumber.replace(/\D/g, ''); // Remove non-digit characters
+  const router = useRouter();
+  const store = useServiceStore();
+  // Retrieve the user object from local storage
+  const userString = localStorage.getItem('user');
+  const user = JSON.parse(userString);
 
-            // Ensure the phone number has 10 to 11 digits
-            if (/^\d{10,11}$/.test(this.phoneNumber)) {
-                // Phone number is valid
-            } else {
-                // Phone number is invalid
-                // You can display an error message or take other actions here
-            }
-        },
-        formatCardNumber() {
-            // Ensure the card number has only 16 digits
-            this.cardNumber = this.cardNumber.replace(/\D/g, '').substring(0, 16);
-        },
-        calculateSubtotal() {
-            return this.cartItems.reduce((total, item) => total + item.unitPrice * item.quantity, 0);
-        },
-        processPayment() {
-            // Handle the payment process here
-            // You can implement payment logic, send data to a server, or navigate to a confirmation page
-        },
-    },
+  const serviceString  = localStorage.getItem('service');
+  const service = JSON.parse(serviceString);
+  
+  // Get the user ID
+  const userId = user.id;
+  
+  // Get the current date
+  const currentDate = new Date();
+  const year = currentDate.getFullYear();
+  const month = (currentDate.getMonth() + 1).toString().padStart(2, '0');
+  const day = currentDate.getDate().toString().padStart(2, '0');
+  
+  // Format the date as a string (e.g., "YYYY-MM-DD")
+  const formattedDate = `${year}-${month}-${day}`;
+  
+  // Create the checkout object
+  const checkout = {
+      user_id: userId,
+      status: 'Pending',
+      total:store.calculateTotal(),
+      appointmentDate: service.appointmentDate,
+      appointmentTime: service.appointmentTime,
+      typeService : service.typeService,
+      typePet: service.typePet,
+      numberPet: service.numberPet,
   };
+  const cancelAppointment =()=>{
+      store.clearService();
+      router.push('/');
+  };
+  // Now, the 'checkout' object contains the user ID and the formatted date
+  const processPayment =()=>{
+      if( !cardNumber || !cvv || !expiryDate || !phoneNumber || !recipientName){
+          toast.warning('Please fill all the blanks',{position:'top-right'}, {duration: 2000});
+          return;
+      }
+      axiosClient.post('/service/checkout',checkout).then((res)=>{
+          console.log(res.data);
+          store.clearService();
+          toast.success('Payment Success',{position:'top-right'}, {duration: 2000});
+          setTimeout(()=>{
+              router.push('/');
+          },2000)
+         
+          
+      }).catch((err)=>{
+          console.log(err);
+      })
+  };
+  
+  onMounted(()=>{
+      store.loadServiceItemsFromLocalStorage();
+      console.log(store.getServiceItems);
+  })
+  
+  
   </script>
   
   <style scoped>

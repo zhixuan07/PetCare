@@ -43,36 +43,20 @@
 
 
             <!--cards-->
-            <div class="row">
-                <div class="col-md-3 col-sm-6 mb-4">
-                    <div class="card" @click="navigateToProductPage">
-                    <img class="card-img" src="../assets/girl.jpg" alt="Product Image">
-                    <p class="product-name">Product Name 1</p>
-                    <p class="unit-price">RM 10.99</p>
+            <div class="card card-compact bg-base-100 shadow-xl"  v-for="product in products" :key="product[0]">
+                    <figure>
+                        <img
+                            :src="product.image_path"
+                            alt="girl"
+                            @click=navigateProductDetails(product)
+                        />
+                    </figure>
+                    <div class="card-body">
+                        <h2 class="card-title">{{ product.name }}</h2>
+                        
+                      
                     </div>
                 </div>
-                <div class="col-md-3 col-sm-6 mb-4">
-                    <div class="card" @click="navigateToProductPage">
-                    <img class="card-img" src="../assets/girl.jpg" alt="Product Image">
-                    <p class="product-name">Product Name 2</p>
-                    <p class="unit-price">RM 15.99</p>
-                    </div>
-                </div>
-                <div class="col-md-3 col-sm-6 mb-4">
-                    <div class="card" @click="navigateToProductPage">
-                    <img class="card-img" src="../assets/guy.jpg" alt="Product Image">
-                    <p class="product-name">Product Name 3</p>
-                    <p class="unit-price">RM 8.99</p>
-                    </div>
-                </div>
-                <div class="col-md-3 col-sm-6 mb-4">
-                    <div class="card" @click="navigateToProductPage">
-                    <img class="card-img" src="../assets/guy.jpg" alt="Product Image">
-                    <p class="product-name">Product Name 4</p>
-                    <p class="unit-price">RM 12.49</p>
-                    </div>
-                </div>
-            </div>
             <!--end of cards-->
 
             
@@ -88,26 +72,85 @@
     </div>
 </template>
   
-<script>
-    import Header from '../components/Header.vue';
-    import Footer from '../components/Footer.vue';
+<script setup >
+import Header from "../components/Header.vue";
+import Footer from "../components/Footer.vue";
+import axiosClient from "../../admin/axiosClient";
+import { onMounted,ref } from "vue";
+import { useRouter } from "vue-router";
+const router = useRouter();
+const products = ref([]); // Store the list of products
+const filteredProducts = ref([]); // Store the filtered list
+const searchQuery = ref(''); // User's search query
+const selectedAvailability = ref('in-stock'); // Default availability filter
+const minPrice = ref(null); // Minimum price filter
+const maxPrice = ref(null); // Maximum price filter
+const sortBy = ref('featured'); // Default sorting option
 
-    export default {
-        components: {
-            Header,
-            Footer
-        },
-        methods: {
-            searchProducts() {
-            // Implement the logic to process the selected filter options
-            // You can access the filter values using the element IDs and then fetch the relevant products.
-            },
-            navigateToProductPage() {
+const navigateProductDetails = (product)=>{
+    router.push({name:'Product',params:{id:product.id}})
+}
+
+onMounted (async => {
+    // Fetch the list of products from the API
+    axiosClient
+      .get('/dogFood')
+      .then((response) => {
+        products.value = response.data.dog_food_products;
+     
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  });
+const searchProducts = () => {
+  // Implement your product filtering logic here.
+  filteredProducts.value = products.value.filter((product) => {
+    // Filter based on availability
+    if (
+      selectedAvailability.value === 'in-stock' && !product.inStock
+    ) {
+      return false;
+    }
+    if (
+      selectedAvailability.value === 'out-of-stock' && product.inStock
+    ) {
+      return false;
+    }
+
+    // Filter based on price range
+    if (
+      (minPrice.value !== null && product.price < minPrice.value) ||
+      (maxPrice.value !== null && product.price > maxPrice.value)
+    ) {
+      return false;
+    }
+
+    // Implement other filters as needed
+
+    // Filter based on the search query (keyword relevance)
+    if (
+      searchQuery.value !== '' &&
+      !product.name.toLowerCase().includes(searchQuery.value.toLowerCase())
+    ) {
+      return false;
+    }
+
+    return true;
+  });
+
+  // Sort the filtered products based on the selected sorting option
+  sortProducts();
+};
+
+const sortProducts =()=> {
+            // Implement the logic to sort the products based on the selected sorting option
+};
+const navigateToProductPage= ()=> {
             // Implement the navigation logic to the product page when a card is clicked
             // You may use Vue Router or other navigation methods.
-            },
-        },
-    };
+ };
+
 </script>
 
 <style scoped>

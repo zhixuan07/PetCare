@@ -99,7 +99,7 @@ const toggleNav   = () => {
                     class="group-hover:bg-white/10 w-full group-active:scale-95 self-stretch pl-2 rounded flex items-center space-x-2 transition-all duration-200 dark:group-hover:text-white dark:hover:text-white text-sm"
                     href="#"
                 >
-                    <span class="font-QuicksandMedium">Appointment</span>
+                    <router-link class="font-QuicksandMedium" to="/adminAppointment">Appointment</router-link>
                 </div>
             </div>
         </div>
@@ -130,21 +130,7 @@ const toggleNav   = () => {
                 </div>
             </div>
 
-            <div class="w-full flex items-center gap-x-1.5 group select-none">
-                <div
-                    class="w-1 rounded-xl h-8 bg-transparent transition-colors duration-200 relative overflow-hidden"
-                >
-                    <div
-                        class="absolute top-0 left-0 w-full h-[102%] translate-y-full group-hover:translate-y-0 bg-red-600 transition-all duration-300"
-                    ></div>
-                </div>
-                <div
-                    class="group-hover:bg-white/10 w-full group-active:scale-95 self-stretch pl-2 rounded flex items-center space-x-2 transition-all duration-200 dark:group-hover:text-white dark:hover:text-white text-sm"
-                    href="#"
-                >
-                    <span class="font-QuicksandMedium">Settings</span>
-                </div>
-            </div>
+          
 
             <div class="w-full flex items-center gap-x-1.5 group select-none">
                 <div

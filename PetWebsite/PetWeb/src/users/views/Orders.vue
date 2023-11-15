@@ -22,12 +22,12 @@
             <router-link
               v-for="order in filteredOrders"
               :key="order.id"
-              :to="'/orderdetails/' + order.id"
+              :to="'/userOrderDetails/' + order.id"
             >
               <div class="order-card" :class="order.status">
                 <div class="order-id">Order ID: {{ order.id }}</div>
                 <div class="order-date">Date: {{ order.date }}</div>
-                <div class="order-amount">Total Amount: ${{ order.totalAmount }}</div>
+                <div class="order-amount">Total Amount: ${{ order.total }}</div>
                 <div class="order-status">Status: {{ order.status }}</div>
               </div>
             </router-link>
@@ -49,19 +49,29 @@
   </template>
   
   <script setup>
-  import { ref, computed } from 'vue';
+  import { ref, computed,onMounted } from 'vue';
   import Header from '../components/Header.vue';
   import Footer from '../components/Footer.vue';
+  import { useRouter } from "vue-router";
+  import axiosClient from '../../admin/axiosClient';
+  const router = useRouter();
+  onMounted(async () => {
+    const userString = localStorage.getItem('user');
+    const user = JSON.parse(userString);
+    try {
+        const response = await axiosClient.get(`/userOrder/${user.id}`);
+        orders.value = response.data.orders;
+        console.log(orders.value)
+      } catch (error) {
+        console.error('Error fetching orders:', error);
+      }
+      
+});
   
   // Sample orders data
-  const orders = ref([
-    { id: 1, date: '2023-11-07', totalAmount: 100.00, status: 'pending' },
-    { id: 2, date: '2023-11-06', totalAmount: 75.50, status: 'completed' },
-    { id: 3, date: '2023-11-05', totalAmount: 50.25, status: 'canceled' },
-    // Add more orders as needed
-  ]);
+  const orders = ref([]);
   
-  const tabs = ['ALL', 'COMPLETED', 'CANCELED', 'PENDING'];
+  const tabs = ['ALL', 'DELIVERED', 'CANCELLED', 'PENDING','SHIPPED'];
   const activeTab = ref('ALL');
   
   const filteredOrders = computed(() => {

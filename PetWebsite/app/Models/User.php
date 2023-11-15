@@ -21,10 +21,16 @@ class User extends Authenticatable
     {
         return $this->hasMany(Order::class,'user_id');
     }
+    public function service()
+    {
+        return $this->hasMany(Service::class,'user_id');
+    }
     protected $fillable = [
         'name',
         'password',
-        'email'
+        'email',
+        'address',
+        'contact'
     ];
 
     /**
@@ -44,7 +50,7 @@ class User extends Authenticatable
      * @var array<string, string>
      */
     protected $casts = [
-        'email_verified_at' => 'datetime',
+
         'password' => 'hashed',
     ];
 }

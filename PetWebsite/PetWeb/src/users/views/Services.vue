@@ -41,12 +41,12 @@ export default {
       bookBathService() {
           // Implement the logic to navigate to the booking page for the selected grooming service.
           // You may use Vue Router or other navigation methods.
-          this.$router.push('/groomingdate'); // Navigate to the Bath Service page
+          this.$router.push('/groomingAppointment'); // Navigate to the Bath Service page
       },
       bookStylingService() {
           // Implement the logic to navigate to the booking page for the selected grooming service.
           // You may use Vue Router or other navigation methods.
-          this.$router.push('/groomingdate'); // Navigate to the Bath Service page
+          this.$router.push('/groomingAppointment'); // Navigate to the Bath Service page
       },
   },
 };

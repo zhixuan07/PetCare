@@ -96,4 +96,14 @@ class ProductController
     public function reduceStock($product_id){
 
     }
+    public function getCatFood()
+    {
+        $catFoodProducts =Product::where('category','Cat Food')->get();
+        return response()->json(['cat_food_products' => $catFoodProducts]);
+    }
+    public function getDogFood()
+    {
+        $dogFoodProducts =Product::where('category','Dog Food')->get();
+        return response()->json(['dog_food_products' => $dogFoodProducts]);
+    }
 }
