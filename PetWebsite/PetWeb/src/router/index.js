@@ -71,14 +71,20 @@ const router = createRouter({
             component: () => import("../users/views/Checkout.vue"),
         },
         {
-            path: "/groomingdate",
-            name: "GroomingDate",
-            component: () => import("../users/views/GroomingDate.vue"),
+            path: "/groomingAppointment",
+            name: "GroomingAppointment",
+            component: () => import("../users/views/GroomingAppointment.vue"),
         },
         {
-            path: "/groomingtime",
-            name: "GroomingTime",
-            component: () => import("../users/views/GroomingTime.vue"),
+            path: "/groomingCheckout",
+            name: "GroomingCheckout",
+            component: () => import("../users/views/GroomingCheckout.vue"),
+        },
+        {
+            path: "/grooming",
+            name: "Grooming",
+            component: () => import("../users/views/Grooming.vue"),
+
         },
         {
             path: "/userprofile",
@@ -96,7 +102,7 @@ const router = createRouter({
             component: () => import("../users/views/Orders.vue"),
         },
         {
-            path: "/orderdetails",
+            path: "/userOrderDetails/:id",
             name: "OrderDetails",
             component: () => import("../users/views/OrderDetails.vue"),
         },
@@ -149,6 +155,11 @@ const router = createRouter({
                 path:'/adminOrderDetails/:id',
                 name:'adminOrderDetails',
                 component: () => import('../admin/views/OrderDetails.vue'),
+              },
+              {
+                path:'/adminAppointment',
+                name:'adminAppointment',
+                component: () => import('../admin/views/Appointment.vue'),
               }
               // Add other admin routes here
             ],

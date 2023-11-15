@@ -16,7 +16,7 @@ const user = {
 function register(ev) {
     ev.preventDefault();
     store.register(user);
-    router.push("/");
+ 
 }
 </script>
 <template>
@@ -62,6 +62,8 @@ function register(ev) {
                         required
                     />
                 </div>
+              
+                 
                 <div class="mb-4">
                     <router-link to="/login" class="text-blue-500 underline"
                         >Already have an account? </router-link

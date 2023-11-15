@@ -59,4 +59,25 @@ class userAuthController extends Controller
             'token'=>$token
         ]);
     }
+    public function updateUser(Request $request,$user_id)
+    {
+        $user = User::find($user_id); // Assuming the user is authenticated
+        $data = $request->validate([
+            'name' => 'required|string',
+            'address'=>'required|string',
+            'contact'=>'required|string'
+
+        ]);
+        if(!$user)
+        {
+            return response() ->json(['message'=>'User not found']);
+        }
+        $user -> name =$data['name'];
+        $user -> address = $data['address'];
+        $user -> contact = $data['contact'];
+        $user->save();
+
+        return response()->json(['user' => $user, 'message' => 'User profile updated successfully']);
+    }
+
 }

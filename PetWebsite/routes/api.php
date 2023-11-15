@@ -8,6 +8,7 @@ use \App\Http\Controllers\userAuthController;
 use \App\Http\Controllers\adminAuthController;
 use \App\Http\Controllers\checkOutController;
 use \App\Http\Controllers\reviewController;
+use \App\Http\Controllers\ServiceController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -30,7 +31,7 @@ Route::middleware('auth:sanctum')->group(function (){
 Route::post('/adminLogin',[adminAuthController::class,'login']);
 Route::post('/userLogin',[userAuthController::class,'login']);
 Route::post('/userRegister',[userAuthController::class,'register']);
-Route::GET('/review/{id}',[reviewController::class,'showReview']);
+Route::get('/review/{id}',[reviewController::class,'showReview']);
 Route::post('/checkout',[checkOutController::class,'checkout']);
 Route::get('/products', [ProductController::class,'index']);
 Route::post('/products/add', [ProductController::class,'store']);
@@ -48,3 +49,11 @@ Route::get('/admin/getTodayRevenue',[OrderController::class,'getTodayRevenue']);
 Route::get('/admin/getTodayOrderChart',[OrderController::class,'getTodayOrderChart']);
 Route::get('/admin/getTotalRevenueChart',[OrderController::class,'getTotalRevenueChart']);
 Route::get('/admin/getTotalSalesByCategoryYearChart',[OrderController::class,'getTotalSalesByCategoryYearChart']);
+Route::post('/service/checkout',[ServiceController::class,'serviceCheckout']);
+Route::get('/userOrder/{id}',[OrderController::class,'getUserOrder']);
+Route::post('/updateUserProfile/{id}',[userAuthController::class,'updateUser']);
+Route::get('/services',[ServiceController::class,'showAllService']);
+Route::get('/catFood', [ProductController::class,'getCatFood']);
+Route::get('/dogFood', [ProductController::class,'getDogFood']);
+
+

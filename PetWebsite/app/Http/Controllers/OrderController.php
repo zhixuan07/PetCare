@@ -128,7 +128,10 @@ class OrderController extends Controller
         return $total_sales_by_categories_year;
     }
 
-
+    public function getUserOrder($user_id){
+        $order= Order::where('user_id',$user_id)->get();
+        return response()->json(['orders'=>$order]);
+    }
 
 
 }
