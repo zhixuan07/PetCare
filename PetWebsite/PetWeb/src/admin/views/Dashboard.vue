@@ -8,6 +8,7 @@ import DayRevenue from "../components/DayRevenue.vue";
 import DailySalesChart from "../components/DailySalesChart.vue";
 import TotalRevenueChart from "../components/TotalRevenueChart.vue";
 import CategoryYearSalesChart from "../components/CategoryYearSalesChart.vue";
+import MonthlySalesChart from "../components/MonthlySalesChart.vue";
 </script>
 <template>
     <div class="flex items-center justify-between m-10">
@@ -26,7 +27,8 @@ import CategoryYearSalesChart from "../components/CategoryYearSalesChart.vue";
         <DailySalesChart class="w-full lg:w-1/3"/>
         <TotalRevenueChart class="w-full lg:w-1/3"/>
         <CategoryYearSalesChart class="w-full lg:w-1/3"/>
+        
 
     </div>
-
+    <MonthlySalesChart class="w-full lg:w-1/3"/>
 </template>

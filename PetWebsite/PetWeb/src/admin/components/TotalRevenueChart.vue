@@ -32,7 +32,7 @@ const createAndConfigureChart = () => {
             labels: labels,
             datasets: [
                 {
-                    label: "Sales",
+                    label: "Sales (RM)",
                     data: dataPoints,
                     fill: false,
                     borderColor: "rgb(75, 192, 192)",
@@ -57,7 +57,7 @@ const createAndConfigureChart = () => {
                 plugins: {
                     title: {
                         display: true,
-                        text: "Total Revenue",
+                        text: "Total Revenue By Year ",
                         align: "start",
                         font: {
                             size: 20,

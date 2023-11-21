@@ -106,4 +106,30 @@ class ProductController
         $dogFoodProducts =Product::where('category','Dog Food')->get();
         return response()->json(['dog_food_products' => $dogFoodProducts]);
     }
+    public function getCatToy()
+    {
+        $catToyProducts =Product::where('category','Cat Toy')->get();
+        return response()->json(['cat_food_products' => $catToyProducts]);
+    }
+    public function getDogToy()
+    {
+        $dogToyProducts =Product::where('category','Dog Toy')->get();
+        return response()->json(['dog_food_products' => $dogToyProducts]);
+    }
+    public function getCatGrooming()
+    {
+        $catGroomingProducts =Product::where('category','Cat Grooming')->get();
+        return response()->json(['cat_grooming_products' => $catGroomingProducts]);
+    }
+    public function getDogGrooming()
+    {
+        $dogGroomingProducts =Product::where('category','Dog Grooming')->get();
+        if(!$dogGroomingProducts){
+            return response()->json(["message"=>"Product not found"]);
+        }else{
+            return response()->json(['dog_grooming_products' => $dogGroomingProducts]);
+        }
+
+    }
+
 }

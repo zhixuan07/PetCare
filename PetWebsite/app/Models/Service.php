@@ -18,7 +18,10 @@ class Service extends Model
         'Date',
         'Time',
         'Type_pet',
-        'Number_of_pet'
+        'Number_of_pet',
+        'Status',
+        'Name'
+
 
     ];
 }

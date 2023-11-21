@@ -15,13 +15,16 @@
                         <img class="profile-picture" src="../assets/featuredproduct.png" alt="Profile Picture">
                     </div>
                     <br>
-                    <button class="btn btn-primary mt-2">Upload New Profile Image</button>
+                   
                     <router-link to="/editprofile">
                         <button class="btn btn-primary mt-2">Edit Profile</button>
                     </router-link>
                    
                     <router-link to="/orders">
                         <button class="btn btn-primary mt-2">View Orders</button>
+                    </router-link>
+                    <router-link to="/orders">
+                        <button class="btn btn-primary mt-2">View Appointment</button>
                     </router-link>
                 </div>
             
@@ -31,7 +34,7 @@
                    
                     <p><strong>Name</strong> <span>{{ user.name }}</span></p>
                     <p><strong>Email</strong> <span>{{user.email}}</span></p>
-                    <p><strong>Contacts</strong> <span>{{  }}</span></p>
+                    <p><strong>Contacts</strong> <span>{{ user.contact }}</span></p>
                 </div>
                   
             </div>
@@ -52,6 +55,8 @@ import {ref,onMounted,computed} from "vue";
 const userString = localStorage.getItem('user');
 const user = JSON.parse(userString);
 const store = useCartStore();
+
+
 function loadCartItemsFromLocalStorage() {
   const items = JSON.parse(localStorage.getItem('cart')) || [];
   store.setCartItems(items); // Call the mutation to set cart items
@@ -66,9 +71,6 @@ onMounted(()=>{
       
  
 });
-
-
-
 </script>
 
 

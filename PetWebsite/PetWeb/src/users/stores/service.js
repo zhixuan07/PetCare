@@ -28,7 +28,9 @@ export const useServiceStore = defineStore("service", {
         calculateTotal() {
             if (this.serviceItems.typeService === "Haircut and Styling") {
                const total = 50 * this.serviceItems.numberPet;
+               console.log(total);
                 return total;
+                
             } else {
                 const total = 65 * this.serviceItems.numberPet;
                 return total;

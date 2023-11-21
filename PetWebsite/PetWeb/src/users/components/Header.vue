@@ -41,12 +41,12 @@
                                 <summary>Toys</summary>
                                 <ul class="p-2 bg-base-100">
                                     <li>
-                                        <router-link to="/food/cat"
+                                        <router-link to="/toy/cat"
                                             >Cat Toys</router-link
                                         >
                                     </li>
                                     <li>
-                                        <router-link to="/food/dog"
+                                        <router-link to="/toy/dog"
                                             >Dog Toys</router-link
                                         >
                                     </li>
@@ -57,10 +57,31 @@
                 </div>
 
 
-                <router-link to="/grooming">GROOMING</router-link>
+                <div class="flex-none z-10">
+                    <ul class="menu menu-horizontal px-1">
+                        <li>
+                            <details>
+                                <summary>Grooming</summary>
+                                <ul class="p-2 bg-base-100">
+                                    <li>
+                                        <router-link to="/grooming/cat"
+                                            >Cat Grooming</router-link
+                                        >
+                                    </li>
+                                    <li>
+                                        <router-link to="/grooming/dog"
+                                            >Dog grooming</router-link
+                                        >
+                                    </li>
+                                </ul>
+                            </details>
+                        </li>
+                    </ul>
+                </div>
+
                 <router-link to="/services">PET SERVICES</router-link>
 
-                <router-link to="/orderdetails">order details test</router-link>
+             
             </nav>
 
             <div class="actions" style="display: flex; align-items: center">

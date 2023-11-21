@@ -1,6 +1,6 @@
 <script setup>
 import axiosClient from "../axiosClient";
-import { ref, onMounted, computed, watch, watchEffect } from "vue";
+import { ref, onMounted, computed, watch, } from "vue";
 import addProductModal from "../components/addProductModal.vue";
 import editProductModal from "../components/editProductModal.vue";
 import Product from "../product";
@@ -29,7 +29,7 @@ watch(searchInput, (value) => {
         });
     } else {
         products.value = products.value.filter((product) => {
-            return product.name.toLowerCase().includes(value.toLowerCase());
+            return product.sku.toLowerCase().includes(value.toLowerCase());
         });
         console.log(products.value);
     }

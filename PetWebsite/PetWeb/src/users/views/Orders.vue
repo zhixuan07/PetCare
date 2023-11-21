@@ -71,14 +71,14 @@
   // Sample orders data
   const orders = ref([]);
   
-  const tabs = ['ALL', 'DELIVERED', 'CANCELLED', 'PENDING','SHIPPED'];
-  const activeTab = ref('ALL');
+  const tabs = ['All', 'Pending','Shipped','Delivered', 'Cancelled'];
+  const activeTab = ref('All');
   
   const filteredOrders = computed(() => {
-    if (activeTab.value === 'ALL') {
+    if (activeTab.value === 'All') {
       return orders.value;
     } else {
-      return orders.value.filter(order => order.status === activeTab.value.toLowerCase());
+      return orders.value.filter(order => order.status === activeTab.value);
     }
   });
   </script>

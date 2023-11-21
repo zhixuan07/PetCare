@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Order;
+use App\Models\OrderDetails;
 use App\Models\Service;
 use App\Models\ServicePayment;
 use Illuminate\Http\Request;
@@ -18,6 +20,7 @@ class ServiceController extends Controller
             'typeService'=>'required',
             'typePet'=>'required',
             'numberPet'=>'required',
+            'name'=>'required'
 
         ]);
         $service = Service::create([
@@ -27,6 +30,8 @@ class ServiceController extends Controller
             'Time'=>$data['appointmentTime'],
             'Type_pet'=>$data['typePet'],
             'Number_of_pet'=>$data['numberPet'],
+            'Status' =>$data['status'],
+            'Name' =>$data['name']
         ]);
         ServicePayment::create([
             'service_id'=>$service->id,
@@ -38,6 +43,39 @@ class ServiceController extends Controller
         $services = Service::all();
         return response()->json(['services' => $services]);
 
+    }
+    public function updateAppointment(Request $request,$id){
+        $service= Service::find($id);
+        if(!$service)
+        {
+            return response() ->json(['message'=>'Order not found']);
+        }
+
+        $validatedData =$request-> validate([
+            'status'=>'required|in:Pending,Processing,Completed',
+        ]);
+
+        $service ->Status =$validatedData['status'];
+        $service ->save();
+        return response() ->json(['message'=>'Appointment update successfully']);
+    }
+    public function cancelAppointment($id)
+    {
+        $service = Service::find($id);
+
+        if($service)
+        {
+
+            $service->Status ='Cancelled';
+            $service->save();
+
+
+
+            return response(['message'=>'Appointment Cancelled']);
+
+        }else{
+            return response()->json(['message'=>'Appointment not Found']);
+        }
     }
 
 }

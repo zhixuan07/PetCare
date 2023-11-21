@@ -1,161 +1,129 @@
 <template>
-    <div class="food">
-        <!-- Header Component -->
-        <Header />
-    
-        <div class="food-page">
-            <h1 class="title">DOG FOOD</h1>
+  <div class="food">
+      <!-- Header Component -->
+      <Header />
 
-            <!--filters-->
-            <div class="filters d-flex align-items-center">
-                <div class="filter">
-                    <label for="availability">Availability :</label>
-                    <select id="availability" class="custom-select">
-                        <option value="in-stock">In Stock</option>
-                        <option value="out-of-stock">Out of Stock</option>
-                    </select>
-                </div>
-                <div class="filter">
-                    <label for="price-range">Price Range (MYR) :</label>
-                    <input type="number" id="from-price" placeholder="From" class="price-input">
-                    <span> to </span>
-                    <input type="number" id="to-price" placeholder="To" class="price-input">
-                </div>
-                <div class="filter">
-                    <label for="sort-by">Sort By : </label>
-                    <select id="sort-by" class="custom-select">
-                        <option value="featured">Featured</option>
-                        <option value="best-selling">Best Selling</option>
-                        <option value="a-z">A-Z</option>
-                        <option value="z-a">Z-A</option>
-                        <option value="price-low-to-high">Price, Low to High</option>
-                        <option value="price-high-to-low">Price, High to Low</option>
-                        <option value="date-old-to-new">Date, Old to New</option>
-                        <option value="date-new-to-old">Date, New to Old</option>
-                    </select>
-                </div>
-                <div class="ml-auto">
-                    <button @click="searchProducts" class="btn btn-primary custom-search-button">
-                        Search
-                    </button>
-                </div>
-            </div>
+      <div class="food-page">
+          <h1 class="title">DOG TOYS</h1>
 
+          <!--filters-->
+          <div class="filters d-flex align-items-center">
+              <div class="filter">
+                  <label for="sort-by">Sort By : </label>
+                  <select
+                      id="sort-by"
+                      v-model="sortBy"
+                      @change="sortProducts"
+                      class="custom-select"
+                  >
+                      <option value="best selling">Best Selling</option>
+                      <option value="a-z">A-Z</option>
+                      <option value="z-a">Z-A</option>
+                      <option value="price-low-to-high">
+                          Price, Low to High
+                      </option>
+                      <option value="price-high-to-low">
+                          Price, High to Low
+                      </option>
+                  </select>
+              </div>
+          </div>
+          <div
+              v-if="sortBy === 'best selling'"
+              class="card card-compact bg-base-100 shadow-xl"
+              v-for="product in products"
+              :key="product.id"
+              @click="navigateProductDetails(product)"
+          >
+          
+              <figure>
+                  <img :src="product.image_path" :alt="product.name" />
+              </figure>
+              <div class="card-body">
+                  <h2 class="card-title">{{ product.name }}</h2>
+                  <h2 class="card-title">RM {{ product.price }}</h2>
+               
+              </div>
+          </div>
 
-            <!--cards-->
-            <div class="card card-compact bg-base-100 shadow-xl"  v-for="product in products" :key="product[0]">
-                    <figure>
-                        <img
-                            :src="product.image_path"
-                            alt="girl"
-                            @click=navigateProductDetails(product)
-                        />
-                    </figure>
-                    <div class="card-body">
-                        <h2 class="card-title">{{ product.name }}</h2>
-                        
-                      
-                    </div>
-                </div>
-            <!--end of cards-->
-
-            
-
-
-
-        </div>
       
+          <div 
+              class="card card-compact bg-base-100 shadow-xl"
+              v-for="product in filteredProducts"
+              :key="product.id"
+              @click="navigateProductDetails(product)"
+          >
+     
+              <figure>
+                  <img :src="product.image_path" :alt="product.name" />
+              </figure>
+              <div class="card-body">
+                  <h2 class="card-title">{{ product.name }}</h2>
+                  <h2 class="card-title">RM {{ product.price }}</h2>
 
-  
-        <!-- Footer Component -->
-        <Footer />
-    </div>
+              </div>
+          </div>
+          <!--end of cards-->
+      </div>
+
+      <!-- Footer Component -->
+      <Footer />
+  </div>
 </template>
-  
-<script setup >
+
+<script setup>
 import Header from "../components/Header.vue";
 import Footer from "../components/Footer.vue";
 import axiosClient from "../../admin/axiosClient";
-import { onMounted,ref } from "vue";
+import { onMounted, ref } from "vue";
 import { useRouter } from "vue-router";
 const router = useRouter();
 const products = ref([]); // Store the list of products
 const filteredProducts = ref([]); // Store the filtered list
-const searchQuery = ref(''); // User's search query
-const selectedAvailability = ref('in-stock'); // Default availability filter
-const minPrice = ref(null); // Minimum price filter
-const maxPrice = ref(null); // Maximum price filter
-const sortBy = ref('featured'); // Default sorting option
 
-const navigateProductDetails = (product)=>{
-    router.push({name:'Product',params:{id:product.id}})
-}
+const sortBy = ref("best selling"); // Default sorting option
 
-onMounted (async => {
-    // Fetch the list of products from the API
-    axiosClient
-      .get('/dogFood')
+const navigateProductDetails = (product) => {
+  router.push({ name: "Product", params: { id: product.id } });
+};
+
+onMounted((async) => {
+  // Fetch the list of products from the API
+  axiosClient
+      .get("/dogFood")
       .then((response) => {
-        products.value = response.data.dog_food_products;
-     
+          products.value = response.data.dog_food_products;
       })
       .catch((error) => {
-        console.log(error);
+          console.log(error);
       });
-  });
-const searchProducts = () => {
-  // Implement your product filtering logic here.
-  filteredProducts.value = products.value.filter((product) => {
-    // Filter based on availability
-    if (
-      selectedAvailability.value === 'in-stock' && !product.inStock
-    ) {
-      return false;
-    }
-    if (
-      selectedAvailability.value === 'out-of-stock' && product.inStock
-    ) {
-      return false;
-    }
+});
 
-    // Filter based on price range
-    if (
-      (minPrice.value !== null && product.price < minPrice.value) ||
-      (maxPrice.value !== null && product.price > maxPrice.value)
-    ) {
-      return false;
-    }
-
-    // Implement other filters as needed
-
-    // Filter based on the search query (keyword relevance)
-    if (
-      searchQuery.value !== '' &&
-      !product.name.toLowerCase().includes(searchQuery.value.toLowerCase())
-    ) {
-      return false;
-    }
-
-    return true;
-  });
-
-  // Sort the filtered products based on the selected sorting option
-  sortProducts();
+const sortProducts = () => {
+  filteredProducts.value = [...products.value];
+  switch (sortBy.value) {
+      case "best selling":
+          filteredProducts.value = null
+      case "a-z":
+          filteredProducts.value.sort((a, b) => a.name.localeCompare(b.name));
+          break;
+      case "z-a":
+          filteredProducts.value.sort((a, b) => b.name.localeCompare(a.name));
+          break;
+      case "price-low-to-high":
+          filteredProducts.value.sort((a, b) => a.price - b.price);
+          break;
+      case "price-high-to-low":
+          filteredProducts.value.sort((a, b) => b.price - a.price);
+          break;
+      default:
+          // Default sorting or no action needed
+          break;
+  }
 };
-
-const sortProducts =()=> {
-            // Implement the logic to sort the products based on the selected sorting option
-};
-const navigateToProductPage= ()=> {
-            // Implement the navigation logic to the product page when a card is clicked
-            // You may use Vue Router or other navigation methods.
- };
-
 </script>
 
 <style scoped>
- 
-
 .title {
   font-size: 40px;
   font-weight: bold;
@@ -173,32 +141,31 @@ const navigateToProductPage= ()=> {
 }
 
 .price-input {
-    border: 1px solid #ccc;
-    padding: 5px;
-    width: 170px; 
-    margin: 0 5px;
-    border-radius: 5px;
+  border: 1px solid #ccc;
+  padding: 5px;
+  width: 170px;
+  margin: 0 5px;
+  border-radius: 5px;
 }
 .custom-select {
-    border: 1px solid #ccc;
-    padding: 5px;
-    width: 170px; 
-    margin: 0 5px;
-    border-radius: 5px;
+  border: 1px solid #ccc;
+  padding: 5px;
+  width: 170px;
+  margin: 0 5px;
+  border-radius: 5px;
 }
 
-
 .custom-search-button {
-    background-color: #26243a; /* Change the background color as desired */
-    color: white; /* Change the text color as desired */
-    border: none;
-    padding: 5px; 
-    border-radius: 5px; 
-    width: 100px;
-    margin: 0 5px;
-    cursor: pointer;
-    font-weight: bold;
-  }
+  background-color: #26243a; /* Change the background color as desired */
+  color: white; /* Change the text color as desired */
+  border: none;
+  padding: 5px;
+  border-radius: 5px;
+  width: 100px;
+  margin: 0 5px;
+  cursor: pointer;
+  font-weight: bold;
+}
 
 .card {
   display: inline-block;
@@ -210,8 +177,8 @@ const navigateToProductPage= ()=> {
 }
 
 .card-img {
-    height: 250px;
-    object-fit: cover;
+  height: 250px;
+  object-fit: cover;
 }
 
 .product-name {

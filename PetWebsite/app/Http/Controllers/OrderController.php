@@ -108,6 +108,17 @@ class OrderController extends Controller
 
 
     }
+    public function getMonthlySalesChart()
+    {
+        $currentYear = now()->year;
+
+        $monthlySales = DB::table('orders')
+            ->select(DB::raw('MONTH(date) as month'), DB::raw('SUM(total) as total_sales'))
+            ->whereYear('date', $currentYear)
+            ->groupBy(DB::raw('MONTH(date)'))
+            ->get();
+        return $monthlySales;
+    }
 
     public function  getTotalRevenueChart()
     {
