@@ -51,23 +51,26 @@
   import Footer from '../components/Footer.vue';
   import { ref,onMounted } from 'vue';
   import { useUserStore } from '../stores/user';
+  import { useRouter } from 'vue-router';
+  const router = useRouter();
   const userString =localStorage.getItem('user');
   const user = ref(JSON.parse(userString));
   const store = useUserStore();
-
   const updateUserProfile = async () => {
   try {
-    // Call the Pinia action to update the user profile
-    await store.updateUserProfile(user.value,user.id);
-
-    // Optionally, you can update the local storage with the latest user data
-    localStorage.setItem('user', JSON.stringify(user.value));
-    
-
+    if (user.value && user.value.id) {
+ 
+      await store.updateUserProfile(user.value, user.value.id);
+      localStorage.setItem('user', JSON.stringify(user.value));
+        router.push('/userprofile');
+    } else {
+      console.error('User or user ID not found.');
+    }
   } catch (error) {
     console.error('Error updating user profile:', error.message);
   }
 };
+
   const profile ={
     name: '',
     email: '',

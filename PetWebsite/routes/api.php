@@ -53,7 +53,14 @@ Route::post('/service/checkout',[ServiceController::class,'serviceCheckout']);
 Route::get('/userOrder/{id}',[OrderController::class,'getUserOrder']);
 Route::post('/updateUserProfile/{id}',[userAuthController::class,'updateUser']);
 Route::get('/services',[ServiceController::class,'showAllService']);
+Route::post('/admin/updateService/{id}',[ServiceController::class,'updateAppointment']);
+Route::post('/admin/cancelService/{id}',[ServiceController::class,'cancelAppointment']);
 Route::get('/catFood', [ProductController::class,'getCatFood']);
 Route::get('/dogFood', [ProductController::class,'getDogFood']);
+Route::get('/catToy', [ProductController::class,'getCatToy']);
+Route::get('/dogToy', [ProductController::class,'getDogToy']);
+Route::get('/dogGrooming', [ProductController::class,'getDogGrooming']);
+Route::get('/catGrooming', [ProductController::class,'getCatGrooming']);
+Route::get('/admin/getMonthlySalesChart',[OrderController::class,'getMonthlySalesChart']);
 
 

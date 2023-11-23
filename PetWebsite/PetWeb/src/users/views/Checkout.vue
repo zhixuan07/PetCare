@@ -125,10 +125,10 @@ const processPayment =()=>{
     axiosClient.post('/checkout',checkout).then((res)=>{
         console.log(res.data);
         store.clearCart();
-        toast.success('Payment Success',{position:'top-right'}, {duration: 2000});
+        toast.success('Payment Success',{position:'top-right'}, {duration: 5000});
         setTimeout(()=>{
             router.push('/');
-        },2000)
+        },6000)
        
         
     }).catch((err)=>{

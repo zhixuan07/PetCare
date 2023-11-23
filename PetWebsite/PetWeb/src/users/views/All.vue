@@ -68,7 +68,7 @@
             <!--cards-->
             
                 <div class="card card-compact bg-base-100 shadow-xl"  v-for="product in products" :key="product[0]">
-                    <figure>
+                    <figure >
                         <img
                             :src="product.image_path"
                             alt="girl"
@@ -169,8 +169,7 @@ const sortProducts =()=> {
 const navigateToProductPage= ()=> {
             // Implement the navigation logic to the product page when a card is clicked
             // You may use Vue Router or other navigation methods.
- }
-
+ };
 </script>
 
 <style scoped>

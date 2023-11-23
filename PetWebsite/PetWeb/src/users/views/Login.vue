@@ -12,13 +12,17 @@ const user = {
     password: "",
     remember: false,
 };
-
-function login(ev) {
+async function login(ev) {
     ev.preventDefault();
-    store.login(user);
-    router.push("/");
-      
+    await store.login(user);
+    if (store.errmsg) {
+        errmsg.value = store.errmsg;
+      } else {
+       router.push("/")
+      }
+  
 }
+
 </script>
 <template>
     <div
@@ -68,6 +72,7 @@ function login(ev) {
 
                 <p class="text-red-500 text-sm mt-2">{{ errmsg }}</p>
             </form>
+            
         </div>
     </div>
 </template>

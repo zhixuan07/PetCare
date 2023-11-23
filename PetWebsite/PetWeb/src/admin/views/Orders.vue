@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted } from "vue";
+import { ref, onMounted,watch } from "vue";
 import axiosClient from "../axiosClient";
 import { useRouter } from "vue-router";
 import updateOrderModal from "../components/updateOrderModal.vue";
@@ -11,6 +11,7 @@ const orders = ref([]);
 const orderID = ref("");
 const orderInfo = ref([]);
 const openModal = ref(false);
+const searchInput = ref("");
 
 onMounted(async () => {
     await axiosClient.get("/admin/orders").then((response) => {
@@ -33,6 +34,19 @@ const closeUpdateOrderModal = () => {
 const cancelOrder = async (id) => {
     deleteOrder(id);
 };
+watch(searchInput, (value) => {
+    if (value === "") {
+        axiosClient.get("/admin/orders").then((response) => {
+            orders.value = response.data.orders;
+        });
+    } else {
+        orders.value = orders.value.filter((order) => {
+            return order.user.name.toLowerCase().includes(value.toLowerCase());
+        });
+
+    }
+});
+
 </script>
 
 <template>

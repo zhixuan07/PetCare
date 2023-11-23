@@ -1,13 +1,14 @@
 <script setup>
-import { ref, onMounted } from "vue";
+import { ref, onMounted,watch } from "vue";
 import axiosClient from "../axiosClient";
 import { useRouter } from "vue-router";
-import updateOrderModal from "../components/updateOrderModal.vue";
-
-const router = useRouter();
+import updateAppointmentModal from "../components/updateAppointmentModal.vue";
+import Appointment from "../appointment";
+const {cancelAppointment} = Appointment();
 const services = ref([]);
-
+const serviceInfo = ref([]);
 const openModal = ref(false);
+const searchInput = ref("");
 
 onMounted(async () => {
     await axiosClient.get("/services").then((response) => {
@@ -16,18 +17,30 @@ onMounted(async () => {
 });
 
 
-const openUpdateOrderModal = (service) => {
-    orderInfo.value = service;
-    console.log(orderInfo.value);
+const openUpdateAppointmentModal = (service) => {
+    serviceInfo.value = service;
+    console.log(serviceInfo.value);
     openModal.value = true;
 };
 
-const closeUpdateOrderModal = () => {
+const closeUpdateAppointmentModal = () => {
     openModal.value = false;
 };
-const cancelOrder = async (id) => {
-    deleteOrder(id);
+const deleteAppointment = async (id) => {
+    cancelAppointment(id);
 };
+watch(searchInput, (value) => {
+    if (value === "") {
+        axiosClient.get("/services").then((response) => {
+            services.value = response.data.services;
+        });
+    } else {
+        services.value = services.value.filter((service) => {
+            return service.Name.toLowerCase().includes(value.toLowerCase());
+        });
+        console.log(services.value);
+    }
+});
 </script>
 
 <template>
@@ -59,7 +72,7 @@ const cancelOrder = async (id) => {
                     <th
                         class="py-2 px-4 bg-gray-200 text-gray-600 font-semibold uppercase border-b border-r border-gray-100"
                     >
-                        User ID
+                        Name
                     </th>
                     <th
                         class="py-2 px-4 bg-gray-200 text-gray-600 font-semibold uppercase border-b border-r border-gray-100"
@@ -89,6 +102,11 @@ const cancelOrder = async (id) => {
                     <th
                         class="py-2 px-4 bg-gray-200 text-gray-600 font-semibold uppercase border-b border-r border-gray-100"
                     >
+                       Status
+                    </th>
+                    <th
+                        class="py-2 px-4 bg-gray-200 text-gray-600 font-semibold uppercase border-b border-r border-gray-100"
+                    >
                        Action
                     </th>
                 </tr>
@@ -97,12 +115,12 @@ const cancelOrder = async (id) => {
                 <tr v-for="service in services" :key="service[i]" class="text-xs">
                     <td
                         class="border py-2 px-4 border-gray-200 underline"
-                        @click="openOrderDetails(service)"
+                        
                     >
                         {{ service.id }}
                     </td>
                     <td class="border py-2 px-4 border-gray-200">
-                        {{ service.user_id}}
+                        {{ service.Name}}
                     </td>
                     <td class="border py-2 px-4 border-gray-200">
                         {{ service.Type_service }}
@@ -119,23 +137,27 @@ const cancelOrder = async (id) => {
                     <td class="border py-2 px-4 border-gray-200">
                         {{ service.Number_of_pet }}
                     </td>
+                    <td class="border py-2 px-4 border-gray-200">
+                        {{ service.Status}}
+                    </td>
+
 
                     <td
                         class="border border-gray-200 py-2 px-4"
                         v-if="
-                            service.status !== 'Cancelled' &&
-                            service.status !== 'Delivered'
+                            service.Status !== 'Cancelled' &&
+                            service.Status !== 'Completed'
                         "
                     >
                         <button
                             class="bg-orange-600 rounded-lg h-10 w-20 m-1 text-white hover:bg-orange-500"
-                            @click="openUpdateOrderModal(service)"
+                            @click="openUpdateAppointmentModal(service)"
                         >
                             Update Appointment
                         </button>
                         <button
                             class="bg-red-600 rounded-lg h-10 w-20 m-1 text-white hover:bg-red-500"
-                            @click="cancelOrder(service.id)"
+                            @click="deleteAppointment(service.id)"
                         >
                             Cancel Appointment
                         </button>
@@ -152,9 +174,9 @@ const cancelOrder = async (id) => {
                 v-if="openModal"
                 class="fixed inset-0 flex items-center justify-center h-full bg-gray-400 bg-opacity-50"
             >
-                <updateOrderModal
-                    @close="closeUpdateOrderModal"
-                    :order_id="orderInfo.id"
+                <updateAppointmentModal
+                    @close="closeUpdateAppointmentModal"
+                    :service_id="serviceInfo.id"
                 />
             </div>
         </Teleport>

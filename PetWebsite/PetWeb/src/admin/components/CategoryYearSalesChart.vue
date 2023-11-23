@@ -29,7 +29,7 @@ onMounted(async () => {
         createAndConfigureChart();
     });
 });
-
+// build the graph with the data received from the API
 const createAndConfigureChart = () => {
     if (barChartCanvas.value) {
         const years = Array.from(

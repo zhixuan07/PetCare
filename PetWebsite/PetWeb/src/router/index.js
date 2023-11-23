@@ -51,6 +51,28 @@ const router = createRouter({
             component:()=>import("../users/views/DogFood.vue")
         },
         {
+            path:"/toy/cat",
+            name:"CatToy",
+            component:()=>import("../users/views/CatToy.vue")
+
+        },
+        {
+            path:"/toy/dog",
+            name:"DogToy",
+            component:()=>import("../users/views/DogToy.vue")
+        },
+        {
+            path:"/grooming/cat",
+            name:"CatGrooming",
+            component:()=>import("../users/views/CatGrooming.vue")
+
+        },
+        {
+            path:"/grooming/dog",
+            name:"DogGrooming",
+            component:()=>import("../users/views/DogGrooming.vue")
+        },
+        {
             path: "/all",
             name: "All",
             component: () => import("../users/views/All.vue"),
@@ -106,16 +128,7 @@ const router = createRouter({
             name: "OrderDetails",
             component: () => import("../users/views/OrderDetails.vue"),
         },
-        {
-            path: "/test",
-            name: "Test",
-            component: () => import("../users/views/Test.vue"),
-        },
-        {
-            path: "/test2",
-            name: "Test2",
-            component: () => import("../users/views/Test2.vue"),
-        },
+       
         {
             path: "/auth",
             redirect: "/adminLogin",
@@ -169,7 +182,8 @@ const router = createRouter({
     ],
 });
 router.beforeEach((to, from, next) => {
-next()
+    document.title = to.name;
+   next()
    
 });
 
