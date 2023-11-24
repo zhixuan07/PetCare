@@ -3,6 +3,7 @@ import { useRouter } from "vue-router";
 import axiosClient from "../../admin/axiosClient";
 const router = useRouter();
 export const useUserStore = defineStore("user", {
+    // store the state
     state: () => ({
         user: null,
         token: null,
@@ -20,6 +21,7 @@ export const useUserStore = defineStore("user", {
             return this.isAuth;
         },
     },
+    // the actions
     actions: {
         setUser(user) {
             this.user = user;
@@ -31,6 +33,7 @@ export const useUserStore = defineStore("user", {
             this.isAuth = isAuth;
         },
         logout() {
+            // set all the state to null and remove the token from localStorage
             this.user = null;
             this.token = null;
             this.isAuth = false;
@@ -39,6 +42,7 @@ export const useUserStore = defineStore("user", {
             localStorage.removeItem("cart");
             location.reload();
         },
+        // Load the user data from localStorage
         loadUserFromLocalStorage() {
             const token = localStorage.getItem("token");
             const user = JSON.parse(localStorage.getItem("user"));
@@ -49,8 +53,8 @@ export const useUserStore = defineStore("user", {
             }
         },
         async login(user) {
-          
             try {
+                //if the login is successful, update the store state with the user data
                const response = await axiosClient.post("/userLogin", user)
                this.setUser(response.data.user);
                this.setIsAuth(true);
@@ -98,6 +102,7 @@ export const useUserStore = defineStore("user", {
                     });
             }
         },
+        // Update the user profile on the server and update the store state with the updated user data
         async updateUserProfile(updatedUser, userID) {
             console.log(userID);
             try {
@@ -107,9 +112,8 @@ export const useUserStore = defineStore("user", {
                     updatedUser
                 );
                 
-                // Optionally, update the store state with the updated user data
+                //  update the store state with the updated user data
                 this.user = response.data.user;
-
                 return response.data;
             } catch (error) {
                 throw new Error(

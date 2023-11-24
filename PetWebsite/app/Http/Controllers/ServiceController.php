@@ -77,5 +77,15 @@ class ServiceController extends Controller
             return response()->json(['message'=>'Appointment not Found']);
         }
     }
+    public function getUserAppointment($id)
+    {
+        $appointment = Service::where('user_id',$id)->get();
+        if (!$appointment){
+            return respone()->json(['Message','Appointment not found']);
+        }else{
+            return response()->json(['Appointment'=>$appointment]);
+        }
+
+    }
 
 }

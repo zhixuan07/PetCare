@@ -106,6 +106,7 @@ const day = currentDate.getDate().toString().padStart(2, '0');
 // Format the date as a string (e.g., "YYYY-MM-DD")
 const formattedDate = `${year}-${month}-${day}`;
 const total = store.calculateSubTotal();
+
 // Create the checkout object
 const checkout = {
     user_id: userId,
@@ -122,8 +123,9 @@ const processPayment =()=>{
         toast.warning('Please fill all the blanks',{position:'top-right'}, {duration: 2000});
         return;
     }
+    // Send the checkout object to the server
     axiosClient.post('/checkout',checkout).then((res)=>{
-        console.log(res.data);
+    
         store.clearCart();
         toast.success('Payment Success',{position:'top-right'}, {duration: 5000});
         setTimeout(()=>{
@@ -137,7 +139,7 @@ const processPayment =()=>{
 }
 
 onMounted(() => {
-    store.loadCartItemsFromLocalStorage();
+
    console.log(checkout)
 });
 

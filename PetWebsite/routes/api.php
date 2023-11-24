@@ -51,6 +51,7 @@ Route::get('/admin/getTotalRevenueChart',[OrderController::class,'getTotalRevenu
 Route::get('/admin/getTotalSalesByCategoryYearChart',[OrderController::class,'getTotalSalesByCategoryYearChart']);
 Route::post('/service/checkout',[ServiceController::class,'serviceCheckout']);
 Route::get('/userOrder/{id}',[OrderController::class,'getUserOrder']);
+Route::get('/userAppointment/{id}',[ServiceController::class,'getUserAppointment']);
 Route::post('/updateUserProfile/{id}',[userAuthController::class,'updateUser']);
 Route::get('/services',[ServiceController::class,'showAllService']);
 Route::post('/admin/updateService/{id}',[ServiceController::class,'updateAppointment']);
