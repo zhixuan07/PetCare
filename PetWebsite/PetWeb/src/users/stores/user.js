@@ -53,8 +53,10 @@ export const useUserStore = defineStore("user", {
             }
         },
         async login(user) {
+
+         
             try {
-                //if the login is successful, update the store state with the user data
+
                const response = await axiosClient.post("/userLogin", user)
                this.setUser(response.data.user);
                this.setIsAuth(true);
@@ -102,7 +104,10 @@ export const useUserStore = defineStore("user", {
                     });
             }
         },
+
         // Update the user profile on the server and update the store state with the updated user data
+
+
         async updateUserProfile(updatedUser, userID) {
             console.log(userID);
             try {
@@ -112,8 +117,13 @@ export const useUserStore = defineStore("user", {
                     updatedUser
                 );
                 
-                //  update the store state with the updated user data
+
+               
+
+                // Optionally, update the store state with the updated user data
                 this.user = response.data.user;
+
+
                 return response.data;
             } catch (error) {
                 throw new Error(

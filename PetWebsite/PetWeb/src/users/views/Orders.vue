@@ -79,6 +79,7 @@ onMounted(async () => {
     }
 });
 
+
 // orders data
 const orders = ref([]);
 
@@ -111,7 +112,9 @@ const cancelOrder = async (id) => {
             position: "top-right",
             duration: 2000,
         });
-    }
+
+  
+
 };
 </script>
 

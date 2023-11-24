@@ -13,6 +13,7 @@ const user = {
     password: "",
     remember: false,
 };
+
 // Login function
 async function login(ev) {
     ev.preventDefault();
@@ -23,8 +24,10 @@ async function login(ev) {
         errmsg.value = store.errmsg;
       } else {
         // Redirect to home page if login succeeds
-       router.push("/")
-      }
+
+
+
+       
   
 }
 
