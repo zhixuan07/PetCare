@@ -70,10 +70,7 @@ export const useCartStore = defineStore('cart', {
             const total = this.cartItems.reduce((total, item) => total + this.calculateItemTotal(item), 0).toFixed(2);
             return total
           },
-          loadCartItemsFromLocalStorage() {
-            const items = JSON.parse(localStorage.getItem('cart')) || [];
-            this.setCartItems(items); // Call the mutation to set cart items
-          },
+          
           clearCart() {
             this.cartItems = [];
             localStorage.setItem('cart', JSON.stringify(this.cartItems));

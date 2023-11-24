@@ -15,7 +15,7 @@
           </tr>
         </thead>
         <tbody>
-          <!-- Example cart items - Replace with your actual data -->
+
           <tr v-for="item in store.getCartItems" :key="item.id">
             <td class="product-cell">
               <div class="product-info">
@@ -77,7 +77,6 @@ const proceedToCheckout=() =>{
 
 onMounted(() => {
 
-  store.loadCartItemsFromLocalStorage();
   });
 
 </script>

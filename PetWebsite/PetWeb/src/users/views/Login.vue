@@ -7,19 +7,27 @@ const router = useRouter();
 const errmsg = ref(null);
 const store = useUserStore();
 
+// Create the user object
 const user = {
     email: "",
     password: "",
     remember: false,
 };
+
+// Login function
 async function login(ev) {
     ev.preventDefault();
     await store.login(user);
+
     if (store.errmsg) {
+        // Display error message if login fails
         errmsg.value = store.errmsg;
       } else {
-       router.push("/")
-      }
+        // Redirect to home page if login succeeds
+
+
+
+       
   
 }
 
