@@ -3,7 +3,6 @@ import { ref } from "vue";
 import { useRouter } from "vue-router";
 import { useUserStore } from "../stores/user";
 
-const router = useRouter();
 const errmsg = ref(null);
 const store = useUserStore();
 
