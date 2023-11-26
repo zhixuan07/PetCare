@@ -104,6 +104,26 @@ export const useUserStore = defineStore("user", {
                     });
             }
         },
+        forgotPassword(email) {
+            if (email) {
+                axiosClient
+                    .post("/forgotPassword", email)
+                    .then((res) => {
+                        if (res.data) {
+                            console.log(res.data);
+                            alert(res.data.message);
+                            router.push("/login");
+                        } else {
+                            // Handle the case where the response doesn't contain the expected data
+                            console.error("Unexpected response format:", res);
+                        }
+                    })
+                    .catch((error) => {
+                        // Handle errors that occur during the request
+                        console.error("Registration failed:", error);
+                    });
+            }
+        },
 
         // Update the user profile on the server and update the store state with the updated user data
 
